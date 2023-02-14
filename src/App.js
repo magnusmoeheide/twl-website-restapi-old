@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { ViewMaps } from './container';
+import { Home } from './container';
+import { AdminManageGrades } from './container';
+import { AdminManageTeachers } from './container';
+import { AdminHome } from './container';
+import { CreateNewMap } from './container';
+import { GenerateNewMap } from './container';
+import Navbar from './Navbar';
 import './App.css';
+
+import {Routes, Route} from 'react-router-dom';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home/>}/>
+          <Route path="/AdminManageGrades" element={<AdminManageGrades/>}/>
+          <Route path="/AdminManageTeachers" element={<AdminManageTeachers/>}/>
+          <Route path="/AdminHome" element={<AdminHome/>}/>
+          <Route path="/CreateNewMap" element={<CreateNewMap/>}/>
+          <Route path="/ViewMaps" element={<ViewMaps/>}/>
+          <Route path="/GenerateNewMap" element={<GenerateNewMap/>}/>
+        </Routes>
     </div>
   );
 }
