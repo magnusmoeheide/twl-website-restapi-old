@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Downshift from 'downshift';
-
+import Logo from '../../assets/smg-logo-transparent.png';
+import { Navbar } from '../../components';
 import { Link } from 'react-router-dom';
 
 const SchoolClasses = [
@@ -43,65 +44,86 @@ const Home = props => {
 
     return (
       <div>
-        <h1>Seat Map Generator</h1>
-        <br />
-        <Link to="/createnewmap">
-            <button>Create New Map</button>
-        </Link>
-
-        <br /><br /><br />
-        <p>
-            My classes: 
-            <select value={selectedMyClass} onChange={e => setSelectedMyClass(e.target.value)}>
-                <option value="" disabled>Choose Class</option>
-                {MyClasses.map(t => (
-                <option key={t.id} value={t.class}>
-                    {t.class} ({t.teacher})
-                </option>
-            ))}
-            </select>
-            <Link to="/viewmaps">
-                <button disabled={!selectedMyClass}>View Maps in Class</button>
-            </Link>
-            <button disabled={!selectedMyClass}>Edit Class</button>  
-        </p>
-
-        <br /><br />
-
-        <div className="samerow">
-            <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
-                itemToString={item => (item ? item.class : '')}
-            >
-            {({getInputProps, getItemProps, getLabelProps,  isOpen, getMenuProps, inputValue,
-                highlightedIndex,selectedItem}) => (
-
-                <div className="seachClassesInSchool">
-                    <label {...getLabelProps()}>My school's classes:</label><br /><br />
-
-                    <input className="searchSchoolDBinput"
-                        {...getInputProps({placeholder: 'Search for Class or Teacher', 
-                        onChange: e => setSearchValueMyClass(e.target.value)
-                        })}
-                    />
-
-                    <button disabled={!selectedSchoolClass}>
-                        View Maps in Class
-                    </button>
-                    <div className="schoolClassesList">
-                        <ul {...getMenuProps()}>
-                            <br />
-                            {isOpen
-                            ? getClassOptions(searchValueMyClass).map((item, index) => (
-                                <li {...getItemProps({key: item.id, index, item,})}>
-                                {item.class} ({item.teacher})
-                                </li>
-                            ))
-                            : null}
-                        </ul>
+        <Navbar title="Home"/>
+        <div className="flexbox fullHeight">
+            <div className="item side left">
+            </div>
+            <div className="item">
+                <div className="flexbox">
+                    <div className="item">
+                        <img src={Logo} alt="" className='logo' />
                     </div>
                 </div>
-                )}
-            </Downshift>
+
+                <div className="center">
+                    <Link to="/createnewmap">
+                        <button className="orangeBg bold">Create New Map</button>
+                    </Link>
+                </div>
+
+                <h3>
+                    My classes
+                </h3>
+
+                <select value={selectedMyClass} onChange={e => setSelectedMyClass(e.target.value)}>
+                    <option value="" disabled>Choose Class</option>
+                    {MyClasses.map(t => (
+                    <option key={t.id} value={t.class}>
+                        {t.class} ({t.teacher})
+                    </option>
+                ))}
+                </select>
+                <Link to="/viewmaps">
+                    <button className="orangeBg" disabled={!selectedMyClass}>View Maps in Class</button>
+                </Link>
+                <button className="orangeBg" disabled={!selectedMyClass}>Edit Class</button>  
+            
+
+
+                <div className="samerow">
+                    <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
+                        itemToString={item => (item ? item.class : '')}
+                    >
+                    {({getInputProps, getItemProps, isOpen, getMenuProps, inputValue,
+                        highlightedIndex,selectedItem}) => (
+
+                        <div>   
+                            <h3>
+                                My school's classes
+                            </h3>
+                            
+                            <input className="inputSearchSchool"
+                                {...getInputProps({placeholder: 'Search for Class or Teacher', 
+                                onChange: e => setSearchValueMyClass(e.target.value)
+                                })}
+                            />
+
+                            <button className="orangeBg" disabled={!selectedSchoolClass}>
+                                View Maps in Class
+                            </button>
+                            
+                            <div className="classesList">
+                                <ul {...getMenuProps()}>
+                                    <br />
+                                    {isOpen
+                                    ? getClassOptions(searchValueMyClass).map((item, index) => (
+                                        <li {...getItemProps({key: item.id, index, item,})}>
+                                        {item.class} ({item.teacher})
+                                        </li>
+                                    ))
+                                    : null}
+                                </ul>
+                            </div>
+                        </div>
+                        )}
+                    </Downshift>
+                </div>   
+            </div>
+            <div className="item side right">
+                <p>School: Skullerud skole</p>
+                <p>Account: Teacher</p>
+                <p>User: magnus.heide@code.berlin</p>
+            </div>
         </div>
 
     </div>

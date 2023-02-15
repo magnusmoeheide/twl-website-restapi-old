@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { act } from 'react-dom/test-utils';
+import { Link } from 'react-router-dom';
+import { Navbar } from '../../components';
 
 
 const MyClasses = [
@@ -10,6 +13,7 @@ const MyClasses = [
 ]
 
 const MapSuggestions = [
+        {type: "Preview", suggestion1: "", suggestion2: "", suggestion3: ""},
         {type: "1 and 1", suggestion1: "Pizza", suggestion2: "Kebab", suggestion3: "Burger"},
         {type: "2 and 2", suggestion1: "Chicken", suggestion2: "Cow", suggestion3: "Dokney"},
         {type: "3 and 3", suggestion1: "Monday", suggestion2: "Tuesday", suggestion3: "Wednesday"},
@@ -21,6 +25,11 @@ const MapSuggestions = [
 const CreateNewMap = () => {
     const [selectedMyClass, setSelectedMyClass] = useState('');
     const [studentCount, setStudentCount] = useState(null);
+    const [activeButtonIndex, setActiveButtonIndex] = useState(null);
+    const [suggestion1, setSuggestion1] = useState(MapSuggestions[0].suggestion1);
+    const [suggestion2, setSuggestion2] = useState(MapSuggestions[0].suggestion2);
+    const [suggestion3, setSuggestion3] = useState(MapSuggestions[0].suggestion3);
+    
 
     const handleSelectChange = (event) => {
         setSelectedMyClass(event.target.value);
@@ -28,72 +37,93 @@ const CreateNewMap = () => {
         setStudentCount(selectedMap.students);
     };
 
-    const [suggestion1, setSuggestion1] = useState(MapSuggestions[0].suggestion1);
-    const [suggestion2, setSuggestion2] = useState(MapSuggestions[0].suggestion2);
-    const [suggestion3, setSuggestion3] = useState(MapSuggestions[0].suggestion3);
-    
-
     const handleClick = index => {
         setSuggestion1(MapSuggestions[index].suggestion1);
         setSuggestion2(MapSuggestions[index].suggestion2);
         setSuggestion3(MapSuggestions[index].suggestion3);
+        setActiveButtonIndex(index);
     };
     
 
   return (
     <div>
-        <h1>Create New Map</h1>
-        <p>
-            <span>
-            {studentCount && (
-                <span>Students: <b>{studentCount} </b></span> 
-            )}
-            </span>
-
-  
-                <select value={selectedMyClass} onChange={handleSelectChange}>
-                    <option value="" disabled>Select class</option>
-                    {MyClasses.map(t => (
-                    <option key={t.id} value={t.class}>
-                        {t.class}
-                    </option>
-                    ))}
-                </select>
-                or 
-                <button>Register a new class</button>
-    
-
-        </p>
-
-        <br /><br />
-        <h4>How should the seats be arranged?</h4>
-        <p>
-            <button onClick={() => handleClick(0)}>{MapSuggestions[0].type}</button>
-            <button onClick={() => handleClick(1)}>{MapSuggestions[1].type}</button>
-            <button onClick={() => handleClick(2)}>{MapSuggestions[2].type}</button>
-            <button onClick={() => handleClick(3)}>{MapSuggestions[3].type}</button>
-            <button onClick={() => handleClick(4)}>{MapSuggestions[4].type}</button>
-            <select name="" id="">
-                <option value="">Custom Seating Arrangement</option>
-                <option>--Create New Custom Arrangement--</option>
-                <option value="">My Arrangement 1</option>
-                
-            </select>
-        </p>
-        <br />
-        <h4>Choose a seating arrangement</h4>
+        <Navbar title="Create New Map"/>
         <div className="flexbox">
-            <div className="item">
-                <p>{suggestion1}</p>
+            <div className="item side left">
+                <Link to="/">
+                    <button className="goBack">&#x2190; Go Back</button>
+                </Link> 
             </div>
             <div className="item">
-                <p>{suggestion2}</p>
+                <div className="flexbox">  
+                    <div className="item">
+
+                        <select className="orangeBg" value={selectedMyClass} onChange={handleSelectChange}>
+                            <option value="" disabled>Select class</option>
+                            {MyClasses.map(t => (
+                            <option key={t.id} value={t.class}>
+                                {t.class}
+                            </option>
+                            ))}
+                        </select>
+
+                        <div className="left heightTwoEm">
+                            <p>
+                                {studentCount && (
+                                    <span>Students: <b>{studentCount}</b></span> 
+                                )}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="item paddingOneEm">
+                        <p>or</p>
+                    </div>
+
+                    <div className="item">
+                        <Link to="/registernewclass">
+                            <button className="orangeBg">Register a new class</button>
+                        </Link>           
+                    </div>
+                </div>   
             </div>
-            <div className="item">
-                <p>{suggestion3}</p>
-            </div>
+            <div className="item side right"></div>
         </div>
-        <button>Continue</button>
+      
+        <div className={selectedMyClass ? '' : 'disabled'}>
+            <h3 className="black">How should the seats be arranged?</h3>
+            <p>
+                <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type}</button>
+                <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type}</button>
+                <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type}</button>
+                <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type}</button>
+                <button onClick={() => handleClick(5)} class={activeButtonIndex === 5 ? 'active' : ''}>{MapSuggestions[5].type}</button>
+
+                <select className="whiteBg" name="" id="">
+                    <option value="">Custom Seating Arrangement</option>
+                    <option>--Create New Custom Arrangement--</option>
+                    <option value="">My Arrangement 1</option>
+                </select>
+            </p>
+        </div>
+        
+        <div className={activeButtonIndex ? '' : 'disabled'}>
+            <h3 className="black">Choose a seating arrangement</h3>
+            <div className="flexbox">
+                <div className="item">
+                    <p>{suggestion1}</p>
+                </div>
+                <div className="item">
+                    <p>{suggestion2}</p>
+                </div>
+                <div className="item">
+                    <p>{suggestion3}</p>
+                </div>
+            </div>
+            <Link to="/optionalconditions">
+                <button className="orangeBg">Continue</button>
+            </Link>   
+        </div>
     </div>
   );
 };
