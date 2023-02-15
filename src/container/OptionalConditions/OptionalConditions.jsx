@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import './OptionalConditions.css';
-
 import { Navbar } from '../../components';
 import { images } from '../../constants';
 

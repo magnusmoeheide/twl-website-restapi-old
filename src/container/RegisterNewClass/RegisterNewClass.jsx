@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 
-import './RegisterNewClass.css';
 
 import { Navbar } from '../../components';
 
 const RegisterNewClass = () => {
+
+    const SchoolGrades = [
+        {id: 1, grade: "Grade 1"},
+        {id: 2, grade: "Grade 2"},
+        {id: 3, grade: "Grade 3"},
+        {id: 4, grade: "Grade 4"},
+    ]
+
     const [savedClass, setSavedClass] = useState({
         Teacher:"",
         Grade:"",
         ClassName:"",
         Students:[]
     });
+    
     const [grade, setGrade] = useState('');
     const [nameClass, setNameClass] = useState('');
     const [inputStudent, setInputStudent] = useState('');
 
     const handleGradeChange = event => {
+        setSelectedSchoolGrade(event.target.value);
         setGrade(event.target.value)
     }
     const handleClassChange = event => {
@@ -26,12 +35,18 @@ const RegisterNewClass = () => {
       };
 
     const [studentList, setStudentList] = useState([]);
+    const [selectedSchoolGrade, setSelectedSchoolGrade] = useState('');
 
     const handleKeyDown = event => {
         if (event.keyCode == 13) {
-            setStudentList([inputStudent, ...studentList]);
-            console.log(studentList);
-            document.getElementById("studentnameinput").value="";
+            if (document.getElementById("studentnameinput").value == "") {
+                alert("Write a name");
+            } else {
+                setStudentList([inputStudent, ...studentList]);
+                console.log(studentList);
+                document.getElementById("studentnameinput").value="";
+            }
+            
         }
     }
 
@@ -54,13 +69,18 @@ const RegisterNewClass = () => {
             <div className='app_registenewclass_divs' id="div1"></div>
             <div className='app_registenewclass_divs' id="div2">
                 <div className="grade_option">
-                    <p className="grade_option_header">Choose Grade:</p>
-                    <select className="grade_dropdown" onChange={handleGradeChange}>
-                        <option disabled selected>Please select an option</option>
-                        <option className='grade_dropdown_options'>Grade 1</option>
-                        <option className='grade_dropdown_options'>Grade 2</option>
-                        <option className='grade_dropdown_options'>Grade 3</option>
-                    </select>
+                    <br />
+                    <p>
+                        <select value={selectedSchoolGrade} onChange={handleGradeChange}>
+                            <option value="" disabled>Choose Grade</option>
+                            {SchoolGrades.map(g => (
+                            <option key={g.id} value={g.grade}>
+                                {g.grade}
+                            </option>
+                        ))}
+                        </select>
+                        If you cannot find your grade, please contact your school Admin.
+                    </p>
                 </div>
 
                 <div className="class_name" style={{flexWrap: "nowrap"}}>
