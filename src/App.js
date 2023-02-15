@@ -22,7 +22,6 @@ function App() {
           <Route path="/AdminHome" element={<AdminHome/>}/>
           <Route path="/CreateNewMap" element={<CreateNewMap/>}/>
           <Route path="/ViewMaps" element={<ViewMaps/>}/>
-          <Route path="/GenerateNewMap" element={<GenerateNewMap/>}/>
         </Routes>
     </div>
   );
