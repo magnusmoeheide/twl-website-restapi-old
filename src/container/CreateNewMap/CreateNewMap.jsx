@@ -110,13 +110,13 @@ const CreateNewMap = () => {
         <div className={activeButtonIndex ? '' : 'disabled'}>
             <h3 className="black">Choose a seating arrangement</h3>
             <div className="flexbox">
-                <div className="item">
+                <div className="item suggestion">
                     <p>{suggestion1}</p>
                 </div>
-                <div className="item">
+                <div className="item suggestion">
                     <p>{suggestion2}</p>
                 </div>
-                <div className="item">
+                <div className="item suggestion">
                     <p>{suggestion3}</p>
                 </div>
             </div>

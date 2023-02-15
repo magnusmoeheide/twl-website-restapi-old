@@ -121,8 +121,8 @@ const Home = props => {
             </div>
             <div className="item side right">
                 <p>School: Skullerud skole</p>
-                <p>Account: Teacher</p>
                 <p>User: magnus.heide@code.berlin</p>
+                <p>Account: Teacher</p> 
             </div>
         </div>
 
