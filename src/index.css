@@ -127,17 +127,42 @@ input::placeholder {
   justify-content: space-around;
   text-align: left;
   padding: 0.5em 0;
-  min-height: 4em;
 }
+
+.flexbox.sortFromLeft {
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.aThird select {
+  margin-left: 0;
+  width: 100%;
+}
+
+.oneGroup {
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+  border-bottom: 0.1em solid rgba(128, 128, 128, 0.147);
+  width: 100%;
+  position: relative;
+}
+
 
 .fullHeight {
   height: calc(100vh - 3em); 
 }
 
+.fullWidth {
+  width: 100%;
+}
+
+
 .aThird {
-  width: 33%;
+  width: 28vw;
   height: 38vh;
-  padding: 1em;
 }
 
 .item {
@@ -147,6 +172,21 @@ input::placeholder {
 .side {
   padding-top: 1em;
   width: 20%;
+} 
+
+.selectAndBtn {
+  width: 100%;
+  display: flex;
+}
+
+.selectAndBtn select {
+  flex: 1;
+  margin-right: 0.1em;
+}
+
+.selectAndBtn button {
+  flex: 0 0 auto;
+  margin-left: 0.1em;
 }
 
 .left {
@@ -198,8 +238,40 @@ li {
   margin-bottom: 1.2em;
 }
 
+.studentGroup {
+  margin-left: -0.6em;
+}
 
-/* CONCRETE STYLING */
+.studentGroup p {
+  margin-top: 0;
+}
+
+.studentGroup p span {
+  color: rgb(255, 120, 1);
+}
+
+.studentGroup li {
+  background-color: rgb(241, 241, 241);
+  display: inline;
+  border-bottom: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.groupFirstBox, .groupSecondBox{
+  max-height: 1em;
+  min-width: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.groupSecondBox {
+  min-width: 12em;
+}
+
+
+/* ------ CONCRETE STYLING ------ */
 
 .heightTwoEm {
   height: 2em;
@@ -216,3 +288,51 @@ li {
   padding-right: 0.5em;
 }
 
+.bottomRight{
+  position: relative;
+}
+
+.bottomRight button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* ----- concrete styling end -------- */
+
+
+/* --------- ICONS ------------- */
+
+.icon {
+  font-size: 1.3em;
+  max-height: 1em;
+  width: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: inherit;
+}
+
+
+.deleteIcon {
+  margin-left: 0.4em;
+  margin-right: 0.5em;
+  color: red;
+}
+
+.removeIcon {
+  margin-left: 1em;
+  right: 0;
+  position: absolute;
+  font-weight: 600;
+  color: orange;
+}
+
+.confirmIcon {
+  margin-left: 1em;
+  font-weight: bold;
+  color: green;
+}
+
+/* ------- icons end ------------ */

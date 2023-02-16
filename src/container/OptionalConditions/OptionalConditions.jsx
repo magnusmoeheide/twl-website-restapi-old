@@ -5,7 +5,7 @@ import { images } from '../../constants';
 
 import { Link } from 'react-router-dom';
 
-const Students = [ "abdi", "peter", "tom", "hans", "jana", "sigri", "anna", "jena", "cem", "magnus"]
+const Students = [ "Abdi", "Peter", "Tom", "Hans", "Jana", "Sigri", "Anna", "Jena", "Cem", "Magnus"]
 const ClassMaps = { 
     Class_9A: [
         "9A-Week1",
@@ -27,7 +27,7 @@ const OptionalConditions = () => {
     
     const handleSitTogetherGroups = event => {
         if (sitTogetherGroup.length > 0) {
-            setSitTogetherGroups({...sitTogetherGroups, [`Group${Object.keys(sitTogetherGroups).length + 1}`]: sitTogetherGroup});
+            setSitTogetherGroups({...sitTogetherGroups, [`Group ${Object.keys(sitTogetherGroups).length +1}`]: sitTogetherGroup});
             setSitTogetherGroup([])
         }
     };
@@ -63,7 +63,7 @@ const OptionalConditions = () => {
     
     const handleNotSitTogetherGroups = event => {
         if (notSitTogetherGroup.length > 0) {
-            setNotSitTogetherGroups({...notSitTogetherGroups, [`Group${Object.keys(notSitTogetherGroups).length + 1}`]: notSitTogetherGroup});
+            setNotSitTogetherGroups({...notSitTogetherGroups, [`Group ${Object.keys(notSitTogetherGroups).length + 1}`]: notSitTogetherGroup});
             setNotSitTogetherGroup([])
         }
     };
@@ -138,160 +138,183 @@ const OptionalConditions = () => {
 
             <div className="flexbox">
                 <div className="item aThird">
-                    <div className="student_sit_together">
+                    <div> {/* WHO SHOULD SIT TOGETHER */}
+                        <div className="">
+                            <p>Who should sit together?</p>
+                            <div className="selectAndBtn">
+                                <select onChange={handleStudentNameChange}>
+                                    <option disabled selected>Please select Students</option>
+                                    {Students.map(element => (
+                                        <option key={element}>{element}</option>
+                                    ))}
+                                </select>
+                                <button onClick={handleSitTogetherGroups}>Save Group</button>
+                            </div>   
+                        </div>
                         <div>
-                            <p >Who should sit together?</p>
-                            <select onChange={handleStudentNameChange}>
-                            <option disabled selected>Please select Student</option>
+                            <ul className="studentGroup">
+                                <p><span>Group: </span>
+                                    {sitTogetherGroup.map(student => (
+                                        <li>{student},&nbsp;</li>
+                                    ))}
+                                </p>
+                            </ul>
+                          
+                            <div>
+                            
+                            {Object.entries(sitTogetherGroups).map(([key, value]) => (
+                            <div className="flexbox sortFromLeft">
+                                <div className="item oneGroup">
+                                    <div className="flexbox sortFromLeft">
+                                        <div className="item icon deleteIcon">
+                                            <p onClick={handleGroupDelete} data-key={key}>&#x2715;</p>
+                                        </div>
+                                        <div className="item groupFirstBox">
+                                            <p>{key}:</p> 
+                                        </div>
+                                        <div className="item groupSecondBox">
+                                            <ul className="studentGroup">
+                                                {value.map((student) => (
+                                                    <li>{student},&nbsp;</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="item icon removeIcon">
+                                            <p onClick={handleGroupPop} data-key={key}>&#x2190;</p>
+                                        </div>
+                                    </div>
+  
+                                </div>
+                            </div>
+                            ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="item aThird">
+                    <div> {/* WHO SHOULD SIT IN FRONT */}
+                        <p>Who has to sit in the front?</p>
+                        <div>
+                            <select onChange={handleFrontSitChange}>
+                                <option disabled selected>Please select a student</option>
                                 {Students.map(element => (
                                     <option key={element}>{element}</option>
                                 ))}
                             </select>
-                            <button onClick={handleSitTogetherGroups}>Save Group</button>
+                            <p></p> {/* FIX THIS ONE */}
                         </div>
                         <div>
-                            <p>Group:</p>
-                            <div>
-                                {sitTogetherGroup.map(student => (
-                                    <p>{student},&nbsp;</p>
-                                ))}
-                            </div>
-                            <div>
-                            {Object.entries(sitTogetherGroups).map(([key, value]) => (
-                                <div style={{paddingBottom: "5px"}}>
-                                    <div>
-                                        <img src={images.XIcon} style={{width: "20px"}} onClick={handleGroupDelete} data-key={key}></img>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <p>{key}:</p> 
-                                            <div className="group_names">
-                                                {value.map((student) => (
-                                                    <p>{student},&nbsp;</p>
-                                                ))}
+                            {sitInFront.map(element => (
+                                <div className="flexbox sortFromLeft">
+                                    <div className="item oneGroup">
+                                        <div className="flexbox sortFromLeft">
+                                            <div className="item icon deleteIcon">
+                                                <p onClick={handleFrontSitDelete} data-key={element}>&#x2715;</p>
+                                            </div>
+                                            <div className="item groupSecondBox">
+                                                <p>{element}</p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <img src={images.BackIconGray} style={{width: "25px"}} onClick={handleGroupPop} data-key={key}></img>
-                                        </div>
                                     </div>
                                 </div>
                             ))}
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="item aThird">
-                    <div className='sit_in_front'>
-                        <p className='sit_in_front_header'>Who has to sit in the front?</p>
-                        <div className='sit_in_front_dropdown_div'>
-                            <select className='sit_in_front_dropdown' onChange={handleFrontSitChange}>
-                                <option disabled selected>Please select a student</option>
-                                {Students.map(element => (
-                                    <option className="sit_in_front_dropdown_options" key={element}>{element}</option>
-                                ))}
+                    <div> {/* EXTRA OPTIONS */}
+                        <div>
+                            <p>Other conditions</p>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={differentPartner}
+                                    onChange={handleDifferentPartnerChange} 
+                                />
+                                Different partner from last map(s)
+                            </label>
+                        </div>
+                        <div className="last_class_maps">
+                            <p className='last_class_maps_header'>Last map created for this class</p>
+                            <select className='class_maps_dropdown'>
+                                    <option disabled selected>Select...</option>
+                                    {Object.entries(ClassMaps).map(([key, value]) => {
+                                        if (key === 'Class_9A') {
+                                            return value.map(element => (
+                                            <option className="class_maps_dropdown_options" key={element}>{element}</option>
+                                            ))
+                                        }
+                                    })}
                             </select>
                         </div>
-                        <div className='sit_in_front_list'>
-                            {sitInFront.map(element => (
-                                <div className='sit_in_front_list_sections'>
-                                    <div className='sit_in_front_list_names'>
-                                        <p>{element}</p>
-                                    </div>
-                                    <div className='sit_in_fron_list_delete'>
-                                        <img src={images.XIcon} style={{width: "20px"}} onClick={handleFrontSitDelete} data-key={element}></img>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                <div className="item aThird">
-                    <div className='extra_options'>
-                    <div className='extra_options_diff_partner'>
-                        <input
-                            type="checkbox"
-                            checked={differentPartner}
-                            onChange={handleDifferentPartnerChange}
-                            
-                        />
-                        <label>Different partner from last map(s)</label>
-                    </div>
-                    <div className="last_class_maps">
-                        <p className='last_class_maps_header'>Last map created for this class</p>
-                        <select className='class_maps_dropdown'>
-                                <option disabled selected>Select...</option>
-                                {Object.entries(ClassMaps).map(([key, value]) => {
-                                    if (key === 'Class_9A') {
-                                        return value.map(element => (
-                                        <option className="class_maps_dropdown_options" key={element}>{element}</option>
-                                        ))
-                                    }
-                                })}
-                        </select>
-                    </div>
 
-                    <div className='extra_options_diff_seat'>
-                        <input
-                            type="checkbox"
-                            checked={differentSeat}
-                            onChange={handleDifferentSeatChange}
-                        />
-                        <label>Different seat from last map</label>
-                    </div>
-                    <div className='extra_options_place_manual'>
-                        <button className='extra_options_place_manual_button'>Manually place a Student</button>
-                    </div>
+                        <div className='extra_options_diff_seat'>
+                            <input
+                                type="checkbox"
+                                checked={differentSeat}
+                                onChange={handleDifferentSeatChange}
+                            />
+                            <label>Different seat from last map</label>
+                        </div>
+                        <button>Manually place a Student</button>
                     </div>
                 </div>
             </div>
             <div className="flexbox">
                 <div className="item aThird">
-                    <div className="student_not_sit_together">
-                    <div>
+                    <div> {/* WHO SHOULD NOT SIT TOGETHER */}
+                        <div>
                             <p>Who should not sit together?</p>
-                            <select onChange={handleStudentNameChange2}>
-                            <option disabled selected>Please select Student</option>
-                                {Students.map(element => (
-                                    <option key={element}>{element}</option>
-                                ))}
-                            </select>
-                            <button onClick={handleNotSitTogetherGroups}>Save Group</button>
+                            <div className="selectAndBtn">
+                                <select onChange={handleStudentNameChange2}>
+                                    <option disabled selected>Please select Students</option>
+                                    {Students.map(element => (
+                                        <option key={element}>{element}</option>
+                                    ))}
+                                </select>
+                                <button onClick={handleNotSitTogetherGroups}>Save Group</button>
+                            </div>  
                         </div>
                         <div>
-                            <p>Group:</p>
-                            <div>
-                                {notSitTogetherGroup.map(student => (
-                                    <p>{student},&nbsp;</p>
-                                ))}
-                            </div>
+                            <ul className="studentGroup">
+                                <p><span>Group: </span>
+                                    {notSitTogetherGroup.map(student => (
+                                        <li>{student},&nbsp;</li>
+                                    ))}
+                                </p>
+                            </ul>
+
                             <div>
                             {Object.entries(notSitTogetherGroups).map(([key, value]) => (
-                                <div style={{paddingBottom: "5px"}}>
-                                    <div>
-                                        <img src={images.XIcon} style={{width: "20px"}} onClick={handleGroupDelete2} data-key={key}></img>
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <p>{key}:</p>
-                                            <div className="group_names">
-                                                {value.map((student) => (
-                                                    <p>{student},&nbsp;</p>
-                                                ))}
-                                            </div>
+                            <div className="flexbox sortFromLeft">
+                                <div className="item oneGroup">
+                                    <div className="flexbox sortFromLeft">
+                                        <div className="item icon deleteIcon">
+                                            <p onClick={handleGroupDelete2} data-key={key}>&#x2715;</p>
                                         </div>
-                                        <div>
-                                            <img src={images.BackIconGray} style={{width: "25px"}} onClick={handleGroupPop2} data-key={key}></img>
+                                        <div className="item groupFirstBox">
+                                            <p>{key}:</p> 
+                                        </div>
+                                        <div className="item groupSecondBox">
+                                            <ul className="studentGroup">
+                                                {value.map((student) => (
+                                                    <li>{student},&nbsp;</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="item icon removeIcon">
+                                            <p onClick={handleGroupPop2} data-key={key}>&#x2190;</p>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             ))}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="item aThird">
-                    <div className='sit_in_back'>
+                    <div> {/* WHO SHOULD SIT IN BACK */}
                     <p>Who has to sit in the back?</p>
                         <div>
                             <select onChange={handleBackSitChange}>
@@ -300,25 +323,31 @@ const OptionalConditions = () => {
                                     <option key={element}>{element}</option>
                                 ))}
                             </select>
+                            <br /><br />
                         </div>
                         <div>
                             {sitInBack.map(element => (
-                                <div>
-                                    <div>
-                                        <p>{element}</p>
-                                    </div>
-                                    <div>
-                                        <img src={images.XIcon} style={{width: "20px"}} onClick={handleBackSitDelete} data-key={element}></img>
-                                    </div>
+                                <div className="flexbox sortFromLeft">
+                                    <div className="item oneGroup">
+                                        <div className="flexbox sortFromLeft">
+                                            <div className="item icon deleteIcon">
+                                                <p onClick={handleBackSitDelete} data-key={element}>&#x2715;</p>
+                                            </div>
+                                            <div className="item groupSecondBox">
+                                                <p>{element}</p>
+                                            </div>
+                                        </div>      
+                                    </div>                               
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-                <div className="item aThird">
-                    <Link to="/generatededitmap">
-                        <button className='generate_map_button'>Generate Seatin Map</button>
-                    </Link>
+                <div className="item aThird bottomRight">
+                        <Link to="/generatededitmap">
+                            <button className="orangeBg">Generate Seating Map</button>   
+                        </Link>
+                
                 </div>
             </div>
 

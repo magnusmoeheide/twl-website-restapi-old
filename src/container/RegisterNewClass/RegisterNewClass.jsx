@@ -68,7 +68,7 @@ const RegisterNewClass = () => {
                 <p>If you cannot find your grade, please contact your school Admin.</p>
             </div>
             <div className="item">
-                <div className="grade_option">
+                <div>
                     <br />
                     <p>What grade is the class in?
                         <select value={selectedSchoolGrade} onChange={handleGradeChange}>
