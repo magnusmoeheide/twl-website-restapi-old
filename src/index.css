@@ -66,8 +66,7 @@ h3 {
 }
 
 h4 {
-  font-size: 0.9em;
-
+  font-size: 1em;
 }
 
 .black {
@@ -85,10 +84,9 @@ select:focus, input:focus {
 
 select:hover, input:hover, button:hover:enabled {
   cursor: pointer;
-  box-shadow: 0 0 11px rgba(33,33,33,.2);
+  box-shadow: 0 0 0.8em rgba(33,33,33,.2);
   transition: 0.2s;
 }
-
 
 .disabled {
   opacity: 0.6;
@@ -124,9 +122,20 @@ input::placeholder {
   color: black;
 }
 
+label input {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
 #checkbox {
   accent-color: rgb(255, 120, 1);
   color: white;
+}
+
+@media (min-width: 1600px) {
+  #checkbox {
+    transform: scale(1.5);
+  }
 }
 
 .lastMap.disabled {
@@ -181,12 +190,13 @@ input::placeholder {
 
 .item {
   order: 1;
-  border: 1px solid black;
 }
 
 .side {
   padding-top: 1em;
-  width: 20%;
+  margin-right: 2em;
+  max-width: 20%;
+  flex-grow: 1;
 } 
 
 .selectAndBtn {
@@ -311,6 +321,14 @@ li {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.smallMarginTop {
+  margin-top: 1em;
+}
+
+.negMarginLeft {
+  margin-left: -0.3em;
 }
 
 /* ----- concrete styling end -------- */

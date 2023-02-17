@@ -85,14 +85,14 @@ const CreateNewMap = () => {
                 </div>   
             </div>
         </div>
-      
+
         <div className={selectedMyClass ? '' : 'disabled'}>
-            <h3 className="black">How should the seats be arranged?</h3>
+            <h3 className="smallMarginTop black">How should the seats be arranged?</h3>
             <p>
                 <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type} <FontAwesomeIcon icon="fa-solid fa-child" /></button>
                 <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type} <FontAwesomeIcon icon="fa-solid fa-children" /></button>
                 <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type} <FontAwesomeIcon icon="fa-solid fa-users" /></button>
-                <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type}</button>
+                <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type} <FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs"/><FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs negMarginLeft"/></button>
                 <button onClick={() => handleClick(5)} class={activeButtonIndex === 5 ? 'active' : ''}>{MapSuggestions[5].type}</button>
 
                 <select className="whiteBg" name="" id="">
@@ -102,7 +102,7 @@ const CreateNewMap = () => {
                 </select>
             </p>
         </div>
-        
+
         <div className={activeButtonIndex ? '' : 'disabled'}>
             <h3 className="black">Choose a seating arrangement</h3>
             <div className="flexbox">

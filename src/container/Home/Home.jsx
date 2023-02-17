@@ -62,7 +62,7 @@ const Home = props => {
                     </Link>
                 </div>
 
-                <h3>
+                <h3 className="smallMarginTop">
                     My classes
                 </h3>
 

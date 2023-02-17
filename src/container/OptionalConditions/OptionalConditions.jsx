@@ -20,6 +20,7 @@ const OptionalConditions = () => {
     const [sitTogetherGroups, setSitTogetherGroups] = useState({});
     const [sitTogetherGroup, setSitTogetherGroup] = useState([]);
     const selectRef = useRef(null);
+    const selectRef2 = useRef(null);
 
     const handleStudentNameChange = event => {
         const newName = event.target.value;
@@ -72,6 +73,12 @@ const OptionalConditions = () => {
 
     };
 
+    const handleGroupDelete2 = (event) => {
+        const keyToDelete = event.target.dataset.key;
+        delete notSitTogetherGroups[keyToDelete];
+        setNotSitTogetherGroups({...notSitTogetherGroups});
+    };
+
     const handleGroupPop = (event) => {
         const keyToUpdate = event.target.dataset.key;
         const updatedGroup = [...sitTogetherGroups[keyToUpdate]];
@@ -102,15 +109,26 @@ const OptionalConditions = () => {
     
     const handleNotSitTogetherGroups = event => {
         if (notSitTogetherGroup.length > 0) {
-            setNotSitTogetherGroups({...notSitTogetherGroups, [`Group ${Object.keys(notSitTogetherGroups).length + 1}`]: notSitTogetherGroup});
-            setNotSitTogetherGroup([])
-        }
-    };
+            if (notSitTogetherGroup.length === 1) {
+                alert('Warning: You are attempting to create a group with only one student.');
+            } else {
+                setNotSitTogetherGroups({...notSitTogetherGroups, [`Group ${Object.keys(notSitTogetherGroups).length +1}`]: notSitTogetherGroup});
+            }
+            setNotSitTogetherGroup([]);
 
-    const handleGroupDelete2 = (event) => {
-        const keyToDelete = event.target.dataset.key;
-        delete notSitTogetherGroups[keyToDelete];
-        setNotSitTogetherGroups({...notSitTogetherGroups});
+            // Reset the select element to the first option
+            selectRef2.current.value = selectRef2.current.options[0].value;
+
+            // Make all the options selectable again except for the first one
+            const options = selectRef2.current.options;
+            for (let i = 0; i < options.length; i++) {
+                if (i === 0) {
+                    options[i].disabled = true;
+                } else {
+                    options[i].disabled = false;
+                }
+            }
+        }
     };
 
     const handleGroupPop2 = (event) => {
@@ -120,10 +138,15 @@ const OptionalConditions = () => {
         notSitTogetherGroups[keyToUpdate] = updatedGroup;
         setNotSitTogetherGroups({...notSitTogetherGroups});
 
-        if (notSitTogetherGroups[keyToUpdate].length === 0) {
+        if (updatedGroup.length === 0) {
             delete notSitTogetherGroups[keyToUpdate];
             setNotSitTogetherGroups({...notSitTogetherGroups});
-        }
+
+          } else if (updatedGroup.length === 1) {
+            const studentName = updatedGroup[0];
+            delete notSitTogetherGroups[keyToUpdate];
+            setNotSitTogetherGroups({...notSitTogetherGroups});
+          }
     };
 
     const [sitInFront, setSitInFront] = useState([]);
@@ -331,7 +354,7 @@ const OptionalConditions = () => {
                             </label>
                         </div>
                         <br />
-                        <button>Manually place a Student</button>
+                        <button>Manually place a Student <FontAwesomeIcon icon="fa-solid fa-arrows-up-down-left-right" /></button>
                     </div>
                 </div>
             </div>
@@ -341,26 +364,25 @@ const OptionalConditions = () => {
                         <div>
                             <h4>Who should not sit together? <FontAwesomeIcon icon="fa-solid fa-people-arrows" /></h4>
                             <div className="selectAndBtn">
-                                <select onChange={handleStudentNameChange2}>
+                                <select className="notSitTogetherSelect" onChange={handleStudentNameChange2} ref={selectRef2}>
                                     <option disabled selected>Please select Students</option>
                                     {Students.map(element => (
                                         <option key={element}>{element}</option>
                                     ))}
                                 </select>
-                                <button onClick={handleNotSitTogetherGroups}>Save Group</button>
+                                <button onClick={handleNotSitTogetherGroups} disabled={notSitTogetherGroup.length === 0}>Save Group</button>
                             </div>  
                         </div>
                         <div>
                             <ul className="studentGroup">
                                 <p><span>Group: </span>
-                                {notSitTogetherGroup.map((student, index) => (
+                                {notSitTogetherGroup.map((member2, index) => (
                                 <li>
-                                    {index === 0 ? `${student} and ` : index === notSitTogetherGroup.length - 1 ? student : `${student} and `}
+                                    {index === 0 ? `\u00A0${member2}` : index === notSitTogetherGroup.length - 1 ? `\u00A0and ${member2}` : `,\u00A0${member2}`}
+                                    {index === notSitTogetherGroup.length - 2 ? ' ' : ''}
+                                    {index === notSitTogetherGroup.length - 1 && index !== 0 ? '' : ''}
                                 </li>
                                 ))}
-
-
-
                                 </p>
                             </ul>
 
@@ -377,9 +399,11 @@ const OptionalConditions = () => {
                                         </div>
                                         <div className="item groupSecondBox">
                                             <ul className="studentGroup">
-                                                {value.map((student) => (
-                                                    <li>{student},&nbsp;</li>
-                                                ))}
+                                                {value.length === 2 ? (
+                                                    <li>{value[0]} and {value[1]}</li>
+                                                    ) : (
+                                                    <li>{value.slice(0, -1).join(", ")} and {value.slice(-1)}</li>
+                                                )}
                                             </ul>
                                         </div>
                                         <div className="item icon removeIcon">
