@@ -3,6 +3,7 @@ import Downshift from 'downshift';
 import Logo from '../../assets/smg-logo-transparent.png';
 import { Navbar } from '../../components';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SchoolClasses = [
     {id: 1, class: '8A', teacher: 'Julie', created: '01-01-2023'},
@@ -57,7 +58,7 @@ const Home = props => {
 
                 <div className="center">
                     <Link to="/createnewmap">
-                        <button className="orangeBg bold">Create New Map</button>
+                        <button className="orangeBg bold">Create New Map <FontAwesomeIcon icon="fa-solid fa-pen" /></button>
                     </Link>
                 </div>
 
@@ -74,9 +75,9 @@ const Home = props => {
                 ))}
                 </select>
                 <Link to="/viewmaps">
-                    <button className="orangeBg" disabled={!selectedMyClass}>View Maps in Class</button>
+                    <button className="orangeBg" disabled={!selectedMyClass}>View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" /></button>
                 </Link>
-                <button className="orangeBg" disabled={!selectedMyClass}>Edit Class</button>  
+                <button className="orangeBg" disabled={!selectedMyClass}>Edit Class <FontAwesomeIcon icon="fa-solid fa-users-gear" /></button>  
             
 
 
@@ -99,7 +100,7 @@ const Home = props => {
                             />
 
                             <button className="orangeBg" disabled={!selectedSchoolClass}>
-                                View Maps in Class
+                                View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" />
                             </button>
                             
                             <div className="classesList">

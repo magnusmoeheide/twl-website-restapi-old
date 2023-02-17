@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background-color: rgb(241, 241, 241);
-  font-size: 1em;
+  font-size: 1vw;
 }
 
 
@@ -23,9 +23,8 @@ button {
 }
 
 button:disabled {
-  background-color: white;
-  color: rgb(255, 120, 1);
-  cursor: default;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 button.orangeBg:disabled {
@@ -66,6 +65,11 @@ h3 {
   margin-bottom: 0.8em;
 }
 
+h4 {
+  font-size: 0.9em;
+
+}
+
 .black {
   color: black;
 }
@@ -90,6 +94,7 @@ select:hover, input:hover, button:hover:enabled {
   opacity: 0.6;
   pointer-events: none;
 }
+
 
 .hidden {
   visibility: hidden;
@@ -119,6 +124,15 @@ input::placeholder {
   color: black;
 }
 
+#checkbox {
+  accent-color: rgb(255, 120, 1);
+  color: white;
+}
+
+.lastMap.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
 
 .flexbox {
   display: flex;
@@ -167,6 +181,7 @@ input::placeholder {
 
 .item {
   order: 1;
+  border: 1px solid black;
 }
 
 .side {
@@ -214,6 +229,10 @@ input::placeholder {
   min-width: 16em;
 }
 
+.inputMapName {
+  min-width: 12em;
+}
+
 .goBack {
   background-color: white;
   color: rgb(255, 120, 1);
@@ -240,6 +259,7 @@ li {
 
 .studentGroup {
   margin-left: -0.6em;
+  width: 100%;
 }
 
 .studentGroup p {
@@ -252,7 +272,7 @@ li {
 
 .studentGroup li {
   background-color: rgb(241, 241, 241);
-  display: inline;
+  display: inline-block;
   border-bottom: 0;
   padding: 0;
   margin: 0;
@@ -260,14 +280,9 @@ li {
 
 .groupFirstBox, .groupSecondBox{
   max-height: 1em;
-  min-width: 4em;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.groupSecondBox {
-  min-width: 12em;
 }
 
 

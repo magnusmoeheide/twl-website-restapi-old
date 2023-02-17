@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { act } from 'react-dom/test-utils';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const MyClasses = [
@@ -49,17 +50,13 @@ const CreateNewMap = () => {
     <div>
         <Navbar title="Create New Map"/>
         <div className="flexbox">
-            <div className="item side left">
-                <Link to="/">
-                    <button className="goBack">&#x2190; Go Back</button>
-                </Link> 
-            </div>
+
             <div className="item">
                 <div className="flexbox">  
                     <div className="item">
 
                         <select className="orangeBg" value={selectedMyClass} onChange={handleSelectChange}>
-                            <option value="" disabled>Select class</option>
+                            <option value="" disabled>Select class <FontAwesomeIcon icon="fa-solid fa-plus" /></option>
                             {MyClasses.map(t => (
                             <option key={t.id} value={t.class}>
                                 {t.class}
@@ -82,20 +79,19 @@ const CreateNewMap = () => {
 
                     <div className="item">
                         <Link to="/registernewclass">
-                            <button className="orangeBg">Register a new class</button>
+                            <button className="orangeBg">Register a new class <FontAwesomeIcon icon="fa-solid fa-plus" /></button>
                         </Link>           
                     </div>
                 </div>   
             </div>
-            <div className="item side right"></div>
         </div>
       
         <div className={selectedMyClass ? '' : 'disabled'}>
             <h3 className="black">How should the seats be arranged?</h3>
             <p>
-                <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type}</button>
-                <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type}</button>
-                <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type}</button>
+                <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type} <FontAwesomeIcon icon="fa-solid fa-child" /></button>
+                <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type} <FontAwesomeIcon icon="fa-solid fa-children" /></button>
+                <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type} <FontAwesomeIcon icon="fa-solid fa-users" /></button>
                 <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type}</button>
                 <button onClick={() => handleClick(5)} class={activeButtonIndex === 5 ? 'active' : ''}>{MapSuggestions[5].type}</button>
 
@@ -121,7 +117,7 @@ const CreateNewMap = () => {
                 </div>
             </div>
             <Link to="/optionalconditions">
-                <button className="orangeBg">Continue</button>
+                <button className="orangeBg">Continue <FontAwesomeIcon icon="fa-solid fa-arrow-right" /></button>
             </Link>   
         </div>
     </div>

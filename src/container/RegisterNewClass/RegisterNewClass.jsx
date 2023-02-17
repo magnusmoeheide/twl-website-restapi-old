@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const RegisterNewClass = () => {
 
@@ -65,7 +66,7 @@ const RegisterNewClass = () => {
     
         <div className="flexbox">
             <div className="item side left">
-                <p>If you cannot find your grade, please contact your school Admin.</p>
+                <p><FontAwesomeIcon icon="fa-regular fa-lightbulb" /> If you cannot find your grade, please contact your school Admin.</p>
             </div>
             <div className="item">
                 <div>
@@ -95,7 +96,7 @@ const RegisterNewClass = () => {
                 </div>
 
                 <div className="center">
-                    <button className="orangeBg" onClick={handleSave}>Save Class</button>
+                    <button className="orangeBg" onClick={handleSave}>Save Class <FontAwesomeIcon icon="fa-solid fa-user-check" /></button>
                 </div>
             </div>
 
@@ -106,7 +107,7 @@ const RegisterNewClass = () => {
                 
                 <div style={{maxHeight: "600px", overflowY: "scroll"}}>
                     {studentList.map(element => (
-                        <p key={element}>{element}</p>
+                        <p key={element}><FontAwesomeIcon icon="fa-solid fa-child" /> {element}</p>
                     ))}
                 </div>
             </div>

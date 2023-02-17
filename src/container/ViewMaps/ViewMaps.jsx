@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Donkey from '../../assets/donkey.webp';
 import Cow from '../../assets/cow.jpeg';
 import Sheep from '../../assets/sheep.jpeg';
-
+import { Navbar } from '../../components';
 
 const ViewMaps = props => {
 
@@ -36,7 +36,8 @@ const ViewMaps = props => {
 
     return (
         <div>
-            <h1>View Your Maps</h1>
+            <Navbar title="View Maps"/>
+            <br />
             <select onChange={handleSelectChange}>
                 <option selected="true" disabled="disabled">Choose map</option>
                 {MyMaps.map((map) => (
