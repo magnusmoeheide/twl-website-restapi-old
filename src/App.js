@@ -8,7 +8,9 @@ import {
   CreateNewMap,
   GeneratedEditMap,
   AdminManageTeachers,
-  AdminHome } from './container';
+  AdminHome,
+  EditClass 
+} from './container';
 
 import Navbar from './Navbar';
 import './App.css';
@@ -30,6 +32,7 @@ function App() {
           <Route path="/GeneratedEditMap" element={<GeneratedEditMap/>}/>
           <Route path="/optionalconditions" element={<OptionalConditions/>}/>
           <Route path="/registernewclass" element={<RegisterNewClass/>}/>
+          <Route path="/editclass" element={<EditClass/>}/>
         </Routes>
     </div>
   );

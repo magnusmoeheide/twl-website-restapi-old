@@ -31,15 +31,18 @@ const GeneratedEditMap = () => {
     
 
   return (
-    <div>
+    <div className="container">
         <Navbar title="Generated Map"/>
         <div className="flexbox">
-            <div className="item side left">
-
-            </div>
+  
             <div className="item center">
-                <img src={createdMap}></img>
                 <div className="flexbox">
+                    <div className="item">
+                        <img src={createdMap}></img>
+                    </div>
+                </div>
+                
+                <div className="flexbox noGrow">
                     <div className="item fullWidth center">
                         <div className="center">
                             <p>Created:</p>
@@ -60,19 +63,12 @@ const GeneratedEditMap = () => {
                             <Link to="/">
                                 <button className="orangeBg">Save and go Home <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" /></button>
                             </Link>
-                            
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="item side right">
-                
-            </div>
-        </div>
-       
-
-
-        
+ 
+        </div>   
     </div>
   )
 };

@@ -47,12 +47,11 @@ const CreateNewMap = () => {
     
 
   return (
-    <div>
+    <div className="container">
         <Navbar title="Create New Map"/>
-        <div className="flexbox">
-
+        <div className="flexbox noGrow">
             <div className="item">
-                <div className="flexbox">  
+                <div className="flexbox smallMarginTop">  
                     <div className="item">
 
                         <select className="orangeBg" value={selectedMyClass} onChange={handleSelectChange}>
@@ -85,41 +84,49 @@ const CreateNewMap = () => {
                 </div>   
             </div>
         </div>
+        <div className="flexbox noGrow">
+            <div className={selectedMyClass ? '' : 'disabled'}>
+                <h3 className="smallMarginTop black center">How should the seats be arranged?</h3>
+                <p>
+                    <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type} <FontAwesomeIcon icon="fa-solid fa-child" /></button>
+                    <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type} <FontAwesomeIcon icon="fa-solid fa-children" /></button>
+                    <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type} <FontAwesomeIcon icon="fa-solid fa-users" /></button>
+                    <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type} <FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs"/><FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs negMarginLeft"/></button>
+                    <button onClick={() => handleClick(5)} class={activeButtonIndex === 5 ? 'active' : ''}>{MapSuggestions[5].type}</button>
 
-        <div className={selectedMyClass ? '' : 'disabled'}>
-            <h3 className="smallMarginTop black">How should the seats be arranged?</h3>
-            <p>
-                <button onClick={() => handleClick(1)} class={activeButtonIndex === 1 ? 'active' : ''}>{MapSuggestions[1].type} <FontAwesomeIcon icon="fa-solid fa-child" /></button>
-                <button onClick={() => handleClick(2)} class={activeButtonIndex === 2 ? 'active' : ''}>{MapSuggestions[2].type} <FontAwesomeIcon icon="fa-solid fa-children" /></button>
-                <button onClick={() => handleClick(3)} class={activeButtonIndex === 3 ? 'active' : ''}>{MapSuggestions[3].type} <FontAwesomeIcon icon="fa-solid fa-users" /></button>
-                <button onClick={() => handleClick(4)} class={activeButtonIndex === 4 ? 'active' : ''}>{MapSuggestions[4].type} <FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs"/><FontAwesomeIcon icon="fa-solid fa-user-group" className="fa-xs negMarginLeft"/></button>
-                <button onClick={() => handleClick(5)} class={activeButtonIndex === 5 ? 'active' : ''}>{MapSuggestions[5].type}</button>
-
-                <select className="whiteBg" name="" id="">
-                    <option value="">Custom Seating Arrangement</option>
-                    <option>--Create New Custom Arrangement--</option>
-                    <option value="">My Arrangement 1</option>
-                </select>
-            </p>
+                    <select className="whiteBg" name="" id="">
+                        <option value="">Custom Seating Arrangement</option>
+                        <option>--Create New Custom Arrangement--</option>
+                        <option value="">My Arrangement 1</option>
+                    </select>
+                </p>
+            </div>
         </div>
+        <span className={activeButtonIndex ? '' : 'disabled'}>
+            <div className="flexbox noGrow">
+                <h3 className="black center">Choose a seating arrangement</h3>        
+            </div>
 
-        <div className={activeButtonIndex ? '' : 'disabled'}>
-            <h3 className="black">Choose a seating arrangement</h3>
             <div className="flexbox">
-                <div className="item suggestion">
+                <div className="item aThird autoHeight center">
                     <p>{suggestion1}</p>
                 </div>
-                <div className="item suggestion">
+                <div className="item aThird autoHeight center">
                     <p>{suggestion2}</p>
                 </div>
-                <div className="item suggestion">
+                <div className="item aThird autoHeight center">
                     <p>{suggestion3}</p>
                 </div>
             </div>
-            <Link to="/optionalconditions">
-                <button className="orangeBg">Continue <FontAwesomeIcon icon="fa-solid fa-arrow-right" /></button>
-            </Link>   
-        </div>
+
+            <div className="flexbox noGrow smallMarginBottom">
+                <div className="center">
+                    <Link to="/optionalconditions">
+                        <button className="orangeBg">Continue <FontAwesomeIcon icon="fa-solid fa-arrow-right" /></button>
+                    </Link> 
+                </div>
+            </div>
+        </span>
     </div>
   );
 };

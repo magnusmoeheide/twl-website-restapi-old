@@ -44,7 +44,7 @@ const Home = props => {
 
 
     return (
-      <div>
+      <div className="container">
         <Navbar title="Home"/>
         <div className="flexbox fullHeight">
             <div className="item side left">
@@ -77,8 +77,9 @@ const Home = props => {
                 <Link to="/viewmaps">
                     <button className="orangeBg" disabled={!selectedMyClass}>View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" /></button>
                 </Link>
-                <button className="orangeBg" disabled={!selectedMyClass}>Edit Class <FontAwesomeIcon icon="fa-solid fa-users-gear" /></button>  
-            
+                <Link to="/editclass">
+                    <button className="orangeBg" disabled={!selectedMyClass}>Edit Class <FontAwesomeIcon icon="fa-solid fa-users-gear" /></button>  
+                </Link>
 
 
                 <div className="samerow">

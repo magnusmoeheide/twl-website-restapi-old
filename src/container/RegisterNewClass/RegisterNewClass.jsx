@@ -61,7 +61,7 @@ const RegisterNewClass = () => {
 
 
   return (
-    <div>
+    <div className="container">
         <Navbar title="Register New Class"/>
     
         <div className="flexbox">
