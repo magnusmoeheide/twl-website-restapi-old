@@ -51,7 +51,7 @@ const Home = props => {
             </div>
             <div className="item">
                 <div className="flexbox">
-                    <div className="item">
+                    <div className="item smallMarginTop">
                         <img src={Logo} alt="" className='logo' />
                     </div>
                 </div>

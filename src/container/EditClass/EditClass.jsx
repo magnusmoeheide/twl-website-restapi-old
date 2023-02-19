@@ -55,9 +55,9 @@ const EditClass = () => {
     return (
         <div className="container">
             <Navbar title="Edit Class"/>
-            <div className="flexbox smallMarginTop">
+            <div className="flexbox">
                 <div className="item minWidth30">
-
+                    <h3>Choose class
                         <select value={selectedMyClass} onChange={handleClassChange}>
                             <option value="" disabled>Choose Class</option>
                             {MyClasses.map(t => (
@@ -66,7 +66,7 @@ const EditClass = () => {
                             </option>
                             ))}
                         </select>
-
+                    </h3>
                     <h3>Students</h3>
                     <ul className="editClass">
                         {selectedClassStudents.map((student, index) => (
@@ -78,10 +78,10 @@ const EditClass = () => {
                                 </div>
                                 ) : (
                                 <div className="item editClass">                                    
-                                    <div className="studentName">{student}</div>
+                                    <div className="studentName"><FontAwesomeIcon icon="fa-solid fa-child" /> {student}</div>
                                     <div className="button-container">
-                                        <button class="editStudentBtn" onClick={() => handleEdit(index)}>Edit</button>
-                                        <button class="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete</button>   
+                                        <button class="editStudentBtn" onClick={() => handleEdit(index)}>Edit <FontAwesomeIcon icon="fa-solid fa-pen" /></button>
+                                        <button class="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete <FontAwesomeIcon icon="fa-solid fa-trash" /></button>   
                                     </div>
                                 </div>
                                 )}
