@@ -127,7 +127,6 @@ const Home = props => {
                 <p>Account: Teacher</p> 
             </div>
         </div>
-
     </div>
     );
 

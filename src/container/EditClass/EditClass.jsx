@@ -3,6 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PopupMessage } from '../../components';
 
 
 const MyClasses = [
@@ -15,10 +16,22 @@ const MyClasses = [
 
 
 const EditClass = () => {
+
+    /* -----  POPUP MESSAGE  ----- */
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('');
+    const [type, setType] = useState(null);
+    const [confirmed, setConfirmed] = useState(false);
+    /* -----  popup message end ----- */
+
     const [selectedMyClass, setSelectedMyClass] = useState('');
     const [selectedClassStudents, setSelectedClassStudents] = useState([]);
     const [editedName, setEditedName] = useState('');
     const [editedIndex, setEditedIndex] = useState(-1);
+    const [indexToDelete, setIndexToDelete] = useState(-1);
 
     const inputRef = useRef(null);
 
@@ -30,10 +43,29 @@ const EditClass = () => {
         setSelectedClassStudents(students);
     }
 
-    const handleDelete = (index) => {
+    const handleConfirmDelete = () => {
         const updatedStudents = [...selectedClassStudents];
-        updatedStudents.splice(index, 1);
+        updatedStudents.splice(indexToDelete, 1);
         setSelectedClassStudents(updatedStudents);
+        setShowPopup(false);
+    };
+
+    const handleDelete = (index) => {
+
+        setType('confirm');
+        setMessage("Are you sure you want to delete the student?");
+        setShowPopup(true);
+        setIndexToDelete(index);
+
+        function onDelete() {
+            if (confirmed) {
+                const updatedStudents = [...selectedClassStudents];
+                updatedStudents.splice(index, 1);
+                setSelectedClassStudents(updatedStudents);
+            }
+            setShowPopup(false);
+        }
+        return onDelete;
     }
 
 
@@ -54,11 +86,19 @@ const EditClass = () => {
 
     return (
         <div className="container">
+            {showPopup && (
+                <PopupMessage
+                message={message}
+                type={type}
+                onClose={handleConfirmDelete}
+                />
+            )}
             <Navbar title="Edit Class"/>
             <div className="flexbox">
                 <div className="item minWidth30">
+                   
                     <h3>Choose class
-                        <select value={selectedMyClass} onChange={handleClassChange}>
+                        <select class="select" value={selectedMyClass} onChange={handleClassChange}>
                             <option value="" disabled>Choose Class</option>
                             {MyClasses.map(t => (
                             <option key={t.id} value={t.class}>
@@ -67,7 +107,10 @@ const EditClass = () => {
                             ))}
                         </select>
                     </h3>
-                    <h3>Students</h3>
+                        
+                    {selectedMyClass && (
+                        <h3>Students</h3>
+                    )}
                     <ul className="editClass">
                         {selectedClassStudents.map((student, index) => (
                             <li key={index}>

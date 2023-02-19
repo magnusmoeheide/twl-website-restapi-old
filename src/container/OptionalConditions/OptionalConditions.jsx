@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Navbar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { PopupMessage } from '../../components';
 
 const Students = [ "Abdi", "Peter", "Tom", "Hans", "Jana", "Sigrid", "Anna", "Jena", "Cem", "Magnus"]
 const ClassMaps = { 
@@ -13,18 +14,33 @@ const ClassMaps = {
 }
 
 const OptionalConditions = () => {
+
+    /* -----  POPUP MESSAGE  ----- */
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('');
+    const [type, setType] = useState(null);
+    /* -----  popup message end ----- */
+
+
     const [studentName, setStudentName] = useState("");
     const [sitTogetherGroups, setSitTogetherGroups] = useState({});
     const [sitTogetherGroup, setSitTogetherGroup] = useState([]);
     const selectRef = useRef(null);
     const selectRef2 = useRef(null);
+    
 
     const handleStudentNameChange = event => {
         const newName = event.target.value;
         if (sitTogetherGroup.length >= 4) {
-            alert("You can only have 4 students in one group.");
+            setType('warning');
+            setMessage("You can only have 4 students in one group.");
+            setShowPopup(true);
             return;
         }
+
         setStudentName(newName);
         setSitTogetherGroup([newName, ...sitTogetherGroup]);
 
@@ -41,31 +57,38 @@ const OptionalConditions = () => {
     const handleSitTogetherGroups = event => {
         if (sitTogetherGroup.length > 0) {
             if (sitTogetherGroup.length === 1) {
-              alert('Warning: You are attempting to create a group with only one student.');
+                setType('warning');
+                setMessage("You are attempting to create a group with only one student.");
+                setShowPopup(true);
             } else {
-              const newGroup = [`Group ${Object.keys(sitTogetherGroups).length +1}`];
+              const existingGroup = Object.keys(sitTogetherGroups).find(
+                groupKey => JSON.stringify(sitTogetherGroups[groupKey].sort()) === JSON.stringify(sitTogetherGroup.sort())
+              );
               const existingNotSitTogetherGroup = Object.keys(notSitTogetherGroups).find(
                 groupKey => JSON.stringify(notSitTogetherGroups[groupKey].sort()) === JSON.stringify(sitTogetherGroup.sort())
               );
-              if (existingNotSitTogetherGroup) {
-                alert(`Error: This group is already in the "not sit together" list as ${existingNotSitTogetherGroup}.`);
+              if (existingGroup || existingNotSitTogetherGroup) {
+                setType('warning');
+                setMessage("This group is already in one of the lists.");
+                setShowPopup(true);
               } else {
+                const newGroup = [`Group ${Object.keys(sitTogetherGroups).length + 1}`];
                 setSitTogetherGroups({...sitTogetherGroups, [newGroup]: sitTogetherGroup});
               }
             }
-            setSitTogetherGroup([]);        
-
+            setSitTogetherGroup([]);
+            
             // Reset the select element to the first option
             selectRef.current.value = selectRef.current.options[0].value;
-
+        
             // Make all the options selectable again except for the first one
             const options = selectRef.current.options;
             for (let i = 0; i < options.length; i++) {
-                if (i === 0) {
-                    options[i].disabled = true;
-                } else {
-                    options[i].disabled = false;
-                }
+              if (i === 0) {
+                options[i].disabled = true;
+              } else {
+                options[i].disabled = false;
+              }
             }
         }
     };
@@ -118,8 +141,7 @@ const OptionalConditions = () => {
         setSitTogetherGroups(newGroups);
       };
 
-
-      const handleGroupPop2 = (event) => {
+    const handleGroupPop2 = (event) => {
         const keyToUpdate = event.target.dataset.key;
         const updatedGroup = [...notSitTogetherGroups[keyToUpdate]];
         updatedGroup.shift();
@@ -142,69 +164,105 @@ const OptionalConditions = () => {
     };
       
 
-
     const [notSitTogetherGroups, setNotSitTogetherGroups] = useState({});
     const [notSitTogetherGroup, setNotSitTogetherGroup] = useState([]);
 
     const handleStudentNameChange2 = event => {
         const newName = event.target.value;
+
+        if (notSitTogetherGroup.length >= 4) {
+            setType('warning');
+            setMessage("You can only have 4 students in one group.");
+            setShowPopup(true);
+            return;
+        }
+        
         setStudentName(newName);
         setNotSitTogetherGroup([newName, ...notSitTogetherGroup]);
+
+        // Disable the selected option
+        const selectElement = event.target;
+        const options = selectElement.options;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].value === newName) {
+            options[i].disabled = true;
+            }
+        }
     }
     
     const handleNotSitTogetherGroups = event => {
         if (notSitTogetherGroup.length > 0) {
             if (notSitTogetherGroup.length === 1) {
-              alert('Warning: You are attempting to create a group with only one student.');
+                setType('warning');
+                setMessage("You are attempting to create a group with only one student.");
+                setShowPopup(true);
             } else {
-              const newGroup = [`Group ${Object.keys(notSitTogetherGroups).length +1}`];
+              const existingGroup = Object.keys(notSitTogetherGroups).find(
+                groupKey => JSON.stringify(notSitTogetherGroups[groupKey].sort()) === JSON.stringify(notSitTogetherGroup.sort())
+              );
               const existingSitTogetherGroup = Object.keys(sitTogetherGroups).find(
                 groupKey => JSON.stringify(sitTogetherGroups[groupKey].sort()) === JSON.stringify(notSitTogetherGroup.sort())
               );
-              if (existingSitTogetherGroup) {
-                alert(`Error: This group is already in the "sit together" list as ${existingSitTogetherGroup}.`);
+              if (existingGroup || existingSitTogetherGroup) {
+                setType('warning');
+                setMessage("This group is already in one of the lists.");
+                setShowPopup(true);
               } else {
+                const newGroup = [`Group ${Object.keys(notSitTogetherGroups).length + 1}`];
                 setNotSitTogetherGroups({...notSitTogetherGroups, [newGroup]: notSitTogetherGroup});
               }
             }
             setNotSitTogetherGroup([]);
-
+        
             // Reset the select element to the first option
             selectRef2.current.value = selectRef2.current.options[0].value;
-
+        
             // Make all the options selectable again except for the first one
             const options = selectRef2.current.options;
             for (let i = 0; i < options.length; i++) {
-                if (i === 0) {
-                    options[i].disabled = true;
-                } else {
-                    options[i].disabled = false;
-                }
+              if (i === 0) {
+                options[i].disabled = true;
+              } else {
+                options[i].disabled = false;
+              }
             }
         }
     };
 
     const [sitInFront, setSitInFront] = useState([]);
     const [sitInBack, setSitInBack] = useState([]);
+    const frontSelectRef = useRef(null);
+    const backSelectRef = useRef(null);
+
+    const handleStudentRemove = (studentName) => {
+        setSitInFront(sitInFront.filter(name => name !== studentName));
+        setSitInBack(sitInBack.filter(name => name !== studentName));
+      }
 
     const handleFrontSitChange = (event) => {
         const newName = event.target.value;
         setSitInFront([newName, ...sitInFront]);
         setSitInBack(sitInBack.filter(name => name !== newName));
+        frontSelectRef.current.value = '';
     }
 
     const handleBackSitChange = (event) => {
         const newName = event.target.value;
         setSitInBack([newName, ...sitInBack]);
         setSitInFront(sitInFront.filter(name => name !== newName));
+        backSelectRef.current.value = '';
     }
 
     const frontOptions = Students.map(element => (
-        <option key={element} disabled={sitInBack.includes(element)}>{element}</option>
+        <option key={element} disabled={sitInBack.includes(element) || sitInFront.includes(element)} onClick={() => handleStudentRemove(element)}>
+            {element}
+        </option>
     ));
     
     const backOptions = Students.map(element => (
-        <option key={element} disabled={sitInFront.includes(element)}>{element}</option>
+        <option key={element} disabled={sitInFront.includes(element) || sitInBack.includes(element)} onClick={() => handleStudentRemove(element)}>
+            {element}
+        </option>
     ));
 
 
@@ -244,21 +302,28 @@ const OptionalConditions = () => {
         }
       };
 
-    const [differentSeat, setDifferentSeat] = useState(false);
 
+    const [differentSeat, setDifferentSeat] = useState(false);
     const handleDifferentSeatChange = (event) => {
         setDifferentSeat(event.target.checked);
       };
 
   return (
     <div className="container">
+        {showPopup && (
+            <PopupMessage
+            message={message}
+            type={type}
+            onClose={handleClosePopup}
+            />
+        )}
         <Navbar title="Optional Conditions"/>
         <div>
             <div className="flexbox">
                 <div className="item aThird">
                     <div> {/* WHO SHOULD SIT TOGETHER */}
                         <div>
-                            <h4>Who should sit together? <FontAwesomeIcon icon="fa-solid fa-children" /></h4>
+                            <h4>Who should sit together?<FontAwesomeIcon icon="fa-solid fa-children" /></h4>
                             <div className="selectAndBtn">
                                 <select className="sitTogetherSelect" onChange={handleStudentNameChange} ref={selectRef}>
                                     <option disabled selected>Please select students</option>
@@ -272,7 +337,7 @@ const OptionalConditions = () => {
                         <div>
                         {(sitTogetherGroup.length > 0 || Object.keys(sitTogetherGroups).length > 0) && (
                             <ul className="studentGroup">
-                                <p><span>Group: </span>
+                                <p><span>Sit together: </span>
                                 {sitTogetherGroup.map((member, index) => (
                                 <li>
                                     {index === 0 ? `\u00A0${member}` : index === sitTogetherGroup.length - 1 ? `\u00A0and ${member}` : `,\u00A0${member}`}
@@ -322,8 +387,8 @@ const OptionalConditions = () => {
                     <div> {/* WHO SHOULD SIT IN FRONT */}
                         <h4>Who has to sit in the front? <FontAwesomeIcon icon="fa-solid fa-person-arrow-up-from-line" /></h4>
                         <div>
-                            <select onChange={handleFrontSitChange}>
-                                <option disabled selected>Please select a student</option>
+                            <select ref={frontSelectRef} onChange={handleFrontSitChange}>
+                                <option key="default" value="" disabled selected>Please select a student</option>
                                 {frontOptions}
                             </select>
                             <p></p> {/* FIX THIS ONE */}
@@ -372,7 +437,7 @@ const OptionalConditions = () => {
                                 />
                                 Different partner from last map
                             </label>
-                            <select className='lastMapSelect' disabled={differentPartnerYear}>
+                            <select className='lastMapSelect' disabled={!differentPartnerLast || differentPartnerYear}>
                                     <option disabled selected>Select last map created for this class</option>
                                     {Object.entries(ClassMaps).map(([key, value]) => {
                                         if (key === 'Class_9A') {
@@ -420,7 +485,7 @@ const OptionalConditions = () => {
                         <div>
                             {(notSitTogetherGroup.length > 0 || Object.keys(notSitTogetherGroups).length > 0) && (
                                 <ul className="studentGroup">
-                                    <p><span>Group: </span>
+                                    <p><span>Not sit together: </span>
                                     {notSitTogetherGroup.map((member2, index) => (
                                     <li>
                                         {index === 0 ? `\u00A0${member2}` : index === notSitTogetherGroup.length - 1 ? `\u00A0and ${member2}` : `,\u00A0${member2}`}
@@ -469,8 +534,8 @@ const OptionalConditions = () => {
                     <div> {/* WHO SHOULD SIT IN BACK */}
                     <h4>Who has to sit in the back? <FontAwesomeIcon icon="fa-solid fa-person-arrow-down-to-line" /></h4>
                         <div>
-                            <select onChange={handleBackSitChange}>
-                                <option disabled selected>Please select a student</option>
+                            <select ref={backSelectRef} onChange={handleBackSitChange}>
+                                <option key="default" value="" disabled selected>Please select a student</option>
                                 {backOptions}
                             </select>
                             <br /><br />
