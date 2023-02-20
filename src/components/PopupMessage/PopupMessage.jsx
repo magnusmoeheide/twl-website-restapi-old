@@ -22,7 +22,7 @@ const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
                     <FontAwesomeIcon icon="fa-solid fa-circle-confirm" className="confirm"/>
                     <span className="icon-text">Please confirm</span>
                     <p>{message}</p>
-                    <button onClick={onConfirm}>Delete student <FontAwesomeIcon icon="fa-solid fa-trash" /></button>  
+                    <button onClick={onConfirm}>Delete student <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
                     <button onClick={onClose}>Go back <FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>        
                 </div>
             );

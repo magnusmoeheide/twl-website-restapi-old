@@ -46,7 +46,7 @@ const ViewMaps = props => {
                             )}
                         </div>
                         <div className="item">
-                            <select onChange={handleSelectChange}>
+                            <select onChange={handleSelectChange} className="smallMarginTop">
                             <option selected="true" disabled="disabled">Choose map</option>
                             {MyMaps.map((map) => (
                             <option key={map.id} value={map.map}>

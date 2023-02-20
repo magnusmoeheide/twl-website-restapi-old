@@ -55,7 +55,7 @@ const CreateNewMap = () => {
                     <div className="item">
 
                         <select className="orangeBg" value={selectedMyClass} onChange={handleSelectChange}>
-                            <option value="" disabled>Select class <FontAwesomeIcon icon="fa-solid fa-plus" /></option>
+                            <option value="" disabled>Select class</option>
                             {MyClasses.map(t => (
                             <option key={t.id} value={t.class}>
                                 {t.class}
@@ -78,7 +78,7 @@ const CreateNewMap = () => {
 
                     <div className="item">
                         <Link to="/registernewclass">
-                            <button className="orangeBg">Register a new class <FontAwesomeIcon icon="fa-solid fa-plus" /></button>
+                            <button className="orangeBg">Register a new class</button>
                         </Link>           
                     </div>
                 </div>   

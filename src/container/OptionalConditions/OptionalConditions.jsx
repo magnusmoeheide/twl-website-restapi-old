@@ -3,6 +3,7 @@ import { Navbar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { PopupMessage } from '../../components';
+import classNames from 'classnames';
 
 const Students = [ "Abdi", "Peter", "Tom", "Hans", "Jana", "Sigrid", "Anna", "Jena", "Cem", "Magnus"]
 const ClassMaps = { 
@@ -337,7 +338,8 @@ const OptionalConditions = () => {
                         <div>
                         {(sitTogetherGroup.length > 0 || Object.keys(sitTogetherGroups).length > 0) && (
                             <ul className="studentGroup">
-                                <p><span>Sit together: </span>
+                                <p><span>Sitting together: </span>
+    
                                 {sitTogetherGroup.map((member, index) => (
                                 <li>
                                     {index === 0 ? `\u00A0${member}` : index === sitTogetherGroup.length - 1 ? `\u00A0and ${member}` : `,\u00A0${member}`}
@@ -345,40 +347,41 @@ const OptionalConditions = () => {
                                     {index === sitTogetherGroup.length - 1 && index !== 0 ? '' : ''}
                                 </li>
                                 ))}
-                                </p>
+            
+                                </p> 
                             </ul>
                           )}
-                            <div>
-                            
-                            {Object.entries(sitTogetherGroups).map(([key, value]) => (
-                            <div className="flexbox sortFromLeft">
-                                <div className="item oneGroup">
-                                    <div className="flexbox sortFromLeft">
-                                        <div className="item icon deleteIcon">
-                                            <p onClick={handleGroupDelete} data-key={key}>&#x2715;</p>
+                            <div className="groupList">
+                                {Object.entries(sitTogetherGroups).map(([key, value]) => (
+                                <div className="flexbox sortFromLeft">
+                                    <div className="item oneGroup">
+                                        <div className="flexbox sortFromLeft">
+                                            <div className="item icon deleteIcon">
+                                                <p onClick={handleGroupDelete} data-key={key}>&#x2715;</p>
+                                            </div>
+                                            <div className="item groupFirstBox">
+                                                <p>{key}:</p> 
+                                            </div>
+                                            <div className="item groupSecondBox">
+                                                <ul className="studentGroup">
+                                                    
+                                                    {value.length === 2 ? (
+                                                    <li>{value[0]} and {value[1]}</li>
+                                                    ) : (
+                                                    <li>{value.slice(0, -1).join(", ")} and {value.slice(-1)}</li>
+                                                    )}
+                                                </ul>
+                                            </div>
+                                            {sitTogetherGroups[key].length >= 3 &&
+                                            <div className="item icon removeIcon">
+                                                <p onClick={handleGroupPop} data-key={key}>&#x2190;</p>
+                                            </div>
+                                            }
                                         </div>
-                                        <div className="item groupFirstBox">
-                                            <p>{key}:</p> 
-                                        </div>
-                                        <div className="item groupSecondBox">
-                                            <ul className="studentGroup">
-                                                {value.length === 2 ? (
-                                                <li>{value[0]} and {value[1]}</li>
-                                                ) : (
-                                                <li>{value.slice(0, -1).join(", ")} and {value.slice(-1)}</li>
-                                                )}
-                                            </ul>
-                                        </div>
-                                        {sitTogetherGroups[key].length >= 3 &&
-                                        <div className="item icon removeIcon">
-                                            <p onClick={handleGroupPop} data-key={key}>&#x2190;</p>
-                                        </div>
-                                        }
+
                                     </div>
-  
                                 </div>
-                            </div>
-                            ))}
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -393,7 +396,14 @@ const OptionalConditions = () => {
                             </select>
                             <p></p> {/* FIX THIS ONE */}
                         </div>
-                        <div>
+
+                        {(sitInFront.length > 0 || Object.keys(sitInFront).length > 0) && (
+                        <ul className="studentGroup">
+                            <p><span>Sitting in front: </span></p>
+                        </ul>
+                        )}
+        
+                        <div className="groupList">
                             {sitInFront.map(element => (
                                 <div className="flexbox sortFromLeft">
                                     <div className="item oneGroup">
@@ -413,57 +423,76 @@ const OptionalConditions = () => {
                 </div>
                 <div className="item aThird">
                     <div> {/* EXTRA OPTIONS */}
-                        <div>
-                            <h4>Other conditions <FontAwesomeIcon icon="fa-solid fa-rotate" /></h4>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    id="checkbox"
-                                    checked={differentPartnerYear}
-                                    onChange={handleDifferentPartnerYearChange} 
-                                />
-                                Different partner from all maps created this year
-                            </label>
-                        </div>
-                        <br />
-                        <div className={`lastMap ${differentPartnerYear ? 'disabled' : ''}`}>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    id="checkbox"
-                                    checked={differentPartnerLast}
-                                    onChange={handleDifferentPartnerLastChange} 
-                                    disabled={differentPartnerYear}
-                                />
-                                Different partner from last map
-                            </label>
-                            <select className='lastMapSelect' disabled={!differentPartnerLast || differentPartnerYear}>
-                                    <option disabled selected>Select last map created for this class</option>
-                                    {Object.entries(ClassMaps).map(([key, value]) => {
-                                        if (key === 'Class_9A') {
-                                            return value.map(element => (
-                                            <option key={element}>{element}</option>
-                                            ))
-                                        }
-                                    })}
-                            </select>
-                        </div>
-                        
-                        <br />
+ 
+                        <h4>Other conditions <FontAwesomeIcon icon="fa-solid fa-rotate" /></h4> 
 
                         <div>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    id="checkbox"
-                                    checked={differentSeat}
-                                    onChange={handleDifferentSeatChange}
-                                />
-                                Different seat from last map
-                            </label>
+                            <table className="conditionsTable">
+                                <tbody>
+                                    <tr>
+                                    <td>Different seat from last map</td>
+                                    <td>
+                                        <label class="switch">
+                                        <input
+                                            type="checkbox"
+                                            id="different-seat-checkbox"
+                                            checked={differentSeat}
+                                            onChange={handleDifferentSeatChange}
+                                        />
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td>Different partner from all maps this year</td>
+                                    <td>
+                                        <label class="switch">
+                                        <input
+                                            type="checkbox"
+                                            id="different-partner-year-checkbox"
+                                            checked={differentPartnerYear}
+                                            onChange={handleDifferentPartnerYearChange} 
+                                        />
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    </tr>
+                                    <tr 
+                                        className={classNames({
+                                        'disabled': differentPartnerYear,
+                                        })}>
+                                    <td>Different partner from last map</td>
+                                    <td>
+                                        <label class="switch">
+                                        <input
+                                            type="checkbox"
+                                            id="different-partner-last-checkbox"
+                                            checked={differentPartnerLast}
+                                            onChange={handleDifferentPartnerLastChange} 
+                                            disabled={differentPartnerYear}
+                                        />
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className={`lastMap ${differentPartnerLast ? 'show' : ''}`}>
+                            <select className="lastMapSelect" disabled={differentPartnerYear}>
+                                <option disabled selected>Select last map created for this class</option>
+                                {Object.entries(ClassMaps).map(([key, value]) => {
+                                if (key === 'Class_9A') {
+                                    return value.map((element) => (
+                                    <option key={element}>{element}</option>
+                                    ));
+                                }
+                                })}
+                            </select>
                         </div>
                         <br />
-                        <button>Manually place a student <FontAwesomeIcon icon="fa-solid fa-arrows-up-down-left-right" /></button>
+                        <button className="noMarginLeft">Manually place a student <FontAwesomeIcon icon="fa-solid fa-user-tag" /></button>
                     </div>
                 </div>
             </div>
@@ -485,7 +514,7 @@ const OptionalConditions = () => {
                         <div>
                             {(notSitTogetherGroup.length > 0 || Object.keys(notSitTogetherGroups).length > 0) && (
                                 <ul className="studentGroup">
-                                    <p><span>Not sit together: </span>
+                                    <p><span>Not sitting together: </span>
                                     {notSitTogetherGroup.map((member2, index) => (
                                     <li>
                                         {index === 0 ? `\u00A0${member2}` : index === notSitTogetherGroup.length - 1 ? `\u00A0and ${member2}` : `,\u00A0${member2}`}
@@ -497,7 +526,7 @@ const OptionalConditions = () => {
                                 </ul>
                             )}
 
-                            <div>
+                            <div className="groupList">
                             {Object.entries(notSitTogetherGroups).map(([key, value]) => (
                             <div className="flexbox sortFromLeft">
                                 <div className="item oneGroup">
@@ -538,9 +567,15 @@ const OptionalConditions = () => {
                                 <option key="default" value="" disabled selected>Please select a student</option>
                                 {backOptions}
                             </select>
-                            <br /><br />
                         </div>
-                        <div>
+
+                        {(sitInBack.length > 0 || Object.keys(sitInBack).length > 0) && (
+                        <ul className="studentGroup">
+                            <p><span>Sitting in back: </span></p>
+                        </ul>
+                        )}
+
+                        <div className="groupList">
                             {sitInBack.map(element => (
                                 <div className="flexbox sortFromLeft">
                                     <div className="item oneGroup">

@@ -16,7 +16,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 98vh !important;
-  border: 3px solid pink;
 }
 
 
@@ -72,6 +71,10 @@ button.orangeBg {
 
 h1 {
   color: black;
+}
+
+h2 {
+  margin-top: 0.2em;
 }
 
 h3 {
@@ -141,21 +144,17 @@ input::placeholder {
 label input {
   margin-top: 1em;
   margin-bottom: 0.5em;
+  vertical-align: middle;
 }
 
 label:hover {
   cursor: pointer;
 }
 
+
 #checkbox {
   accent-color: rgb(255, 120, 1);
   color: white;
-}
-
-@media (min-width: 1600px) {
-  #checkbox {
-    transform: scale(1.5);
-  }
 }
 
 .lastMap.disabled {
@@ -215,7 +214,11 @@ label:hover {
 
 .item {
   order: 1;
-  border: 1px solid black;
+}
+
+.groupList {
+  max-height: 10.5em;
+  overflow-y: scroll;
 }
 
 /* EDIT CLASS */
@@ -249,6 +252,10 @@ label:hover {
   background-color: transparent;
   margin-bottom: 0.3em;
   border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+}
+
+.noMarginLeft {
+  margin-left: 0;
 }
 
 
@@ -285,7 +292,7 @@ label:hover {
 }
 
 .classesList {
-  max-height: 250px; /* ISSUE */
+  max-height: 16em;
   overflow-y: scroll;
 }
 
@@ -295,6 +302,10 @@ label:hover {
 
 .inputMapName {
   min-width: 12em;
+}
+
+.studentName span {
+  margin-left: 0.6em;
 }
 
 .goBack {
@@ -322,6 +333,34 @@ li {
   margin-bottom: 1.2em;
 }
 
+td {
+  padding: 1em;
+}
+
+.conditionsTable {
+  padding-top: 0;
+  width: 100%;
+}
+
+.conditionsTable td {
+  padding-left: 0;
+  padding-top: 0.3em;
+  padding-bottom: 1.5em;
+}
+
+.lastMap {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.lastMap.show {
+  opacity: 1;
+  max-height: 5em; /* or any other value that fits your needs */
+}
+
+
 .student-name {
   flex-grow: 1;
 }
@@ -333,10 +372,12 @@ li {
 
 .studentGroup p {
   margin-top: 0;
+  margin-bottom: 0.2em;
 }
 
 .studentGroup p span {
   color: rgb(255, 120, 1);
+  margin-right: 0.3em;
 }
 
 .studentGroup li {
@@ -345,6 +386,11 @@ li {
   border-bottom: 0;
   padding: 0;
   margin: 0;
+}
+
+.studentCount {
+  margin-left: 1em;
+  border: 1px solid red;
 }
 
 .groupFirstBox, .groupSecondBox{
@@ -436,3 +482,68 @@ li {
 }
 
 /* ------- icons end ------------ */
+
+
+
+/* ----- SWITCH START ------ */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 1.875em;
+  height: 1.063em;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  transition: 0.4s;
+  border-radius: 1.063em;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 0.813em;
+  width: 0.813em;
+  left: 0.125em;
+  bottom: 0.125em;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.03125em green;
+}
+
+input:checked + .slider:before {
+  transform: translateX(0.813em);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1.063em;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/* ---- switch end ---- */

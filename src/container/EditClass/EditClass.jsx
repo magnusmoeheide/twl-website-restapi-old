@@ -51,21 +51,10 @@ const EditClass = () => {
     };
 
     const handleDelete = (index) => {
-
         setType('confirm');
         setMessage("Are you sure you want to delete the student?");
         setShowPopup(true);
         setIndexToDelete(index);
-
-        function onDelete() {
-            if (confirmed) {
-                const updatedStudents = [...selectedClassStudents];
-                updatedStudents.splice(index, 1);
-                setSelectedClassStudents(updatedStudents);
-            }
-            setShowPopup(false);
-        }
-        return onDelete;
     }
 
 
@@ -86,11 +75,12 @@ const EditClass = () => {
 
     return (
         <div className="container">
-            {showPopup && (
+            {showPopup && type === 'confirm' && (
                 <PopupMessage
                 message={message}
                 type={type}
-                onClose={handleConfirmDelete}
+                onConfirm={handleConfirmDelete}
+                onClose={handleClosePopup}
                 />
             )}
             <Navbar title="Edit Class"/>
@@ -109,7 +99,7 @@ const EditClass = () => {
                     </h3>
                         
                     {selectedMyClass && (
-                        <h3>Students</h3>
+                        <h3>Students ({selectedClassStudents.length})</h3>
                     )}
                     <ul className="editClass">
                         {selectedClassStudents.map((student, index) => (
@@ -121,10 +111,10 @@ const EditClass = () => {
                                 </div>
                                 ) : (
                                 <div className="item editClass">                                    
-                                    <div className="studentName"><FontAwesomeIcon icon="fa-solid fa-child" /> {student}</div>
+                                    <div className="studentName"><FontAwesomeIcon icon="fa-solid fa-child" /><span>{student}</span></div>
                                     <div className="button-container">
-                                        <button class="editStudentBtn" onClick={() => handleEdit(index)}>Edit <FontAwesomeIcon icon="fa-solid fa-pen" /></button>
-                                        <button class="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete <FontAwesomeIcon icon="fa-solid fa-trash" /></button>   
+                                        <button class="editStudentBtn" onClick={() => handleEdit(index)}>Edit</button>
+                                        <button class="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete</button>   
                                     </div>
                                 </div>
                                 )}
