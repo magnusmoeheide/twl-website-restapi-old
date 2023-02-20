@@ -16,7 +16,7 @@ const MyClasses = [
 const MapSuggestions = [
         {type: "Preview", suggestion1: "", suggestion2: "", suggestion3: ""},
         {type: "1 and 1", suggestion1: "Pizza", suggestion2: "Kebab", suggestion3: "Burger"},
-        {type: "2 and 2", suggestion1: "Chicken", suggestion2: "Cow", suggestion3: "Dokney"},
+        {type: "2 and 2", suggestion1: "Chicken", suggestion2: "Cow", suggestion3: "Donkey"},
         {type: "3 and 3", suggestion1: "Monday", suggestion2: "Tuesday", suggestion3: "Wednesday"},
         {type: "4 and 4", suggestion1: "Plate", suggestion2: "Glass", suggestion3: "Fork"},
         {type: "U-shape", suggestion1: "Plant", suggestion2: "Tree", suggestion3: "Bush"}
@@ -26,6 +26,7 @@ const MapSuggestions = [
 const CreateNewMap = () => {
     const [selectedMyClass, setSelectedMyClass] = useState('');
     const [studentCount, setStudentCount] = useState(null);
+    const [activeArrangementIndex, setActiveArrangementIndex] = useState(null);
     const [activeButtonIndex, setActiveButtonIndex] = useState(null);
     const [suggestion1, setSuggestion1] = useState(MapSuggestions[0].suggestion1);
     const [suggestion2, setSuggestion2] = useState(MapSuggestions[0].suggestion2);
@@ -42,9 +43,29 @@ const CreateNewMap = () => {
         setSuggestion1(MapSuggestions[index].suggestion1);
         setSuggestion2(MapSuggestions[index].suggestion2);
         setSuggestion3(MapSuggestions[index].suggestion3);
-        setActiveButtonIndex(index);
+        setActiveArrangementIndex(index);
     };
-    
+
+    const handleArrangementChoice = index => {
+        setActiveButtonIndex(index);
+    }
+
+    // Get all the suggestion divs
+    const suggestionDivs = document.querySelectorAll('.suggestion');
+
+    // Loop through each suggestion div and add a click event listener
+    suggestionDivs.forEach(suggestionDiv => {
+    suggestionDiv.addEventListener('click', () => {
+        // Deselect all suggestion divs
+        suggestionDivs.forEach(div => {
+        div.classList.remove('selected');
+        });
+        
+        // Select the clicked suggestion div and apply a new CSS styling
+        suggestionDiv.classList.add('selected');
+    });
+    });
+ 
 
   return (
     <div className="container">
@@ -102,31 +123,32 @@ const CreateNewMap = () => {
                 </p>
             </div>
         </div>
-        <span className={activeButtonIndex ? '' : 'disabled'}>
+        <span className={activeArrangementIndex ? '' : 'disabled'}>
             <div className="flexbox noGrow">
                 <h3 className="black center">Choose a seating arrangement</h3>        
             </div>
 
-            <div className="flexbox">
-                <div className="item aThird autoHeight center">
+            <div className="flexbox" onClick={handleArrangementChoice}>
+                <div className="item aThird autoHeight center suggestion">
                     <p>{suggestion1}</p>
                 </div>
-                <div className="item aThird autoHeight center">
+                <div className="item aThird autoHeight center suggestion">
                     <p>{suggestion2}</p>
                 </div>
-                <div className="item aThird autoHeight center">
+                <div className="item aThird autoHeight center suggestion">
                     <p>{suggestion3}</p>
                 </div>
             </div>
-
+        </span>
+        <div className={activeButtonIndex ? '' : 'disabled'}>
             <div className="flexbox noGrow smallMarginBottom">
                 <div className="center">
                     <Link to="/optionalconditions">
-                        <button className="orangeBg">Continue <FontAwesomeIcon icon="fa-solid fa-arrow-right" /></button>
+                        <button className="orangeBg smallMarginTop">Continue <FontAwesomeIcon icon="fa-solid fa-arrow-right" /></button>
                     </Link> 
                 </div>
             </div>
-        </span>
+        </div>
     </div>
   );
 };
