@@ -69,10 +69,6 @@ button.orangeBg {
   text-align: center;
 }
 
-.suggestion {
-  border: 2px solid rgb(255, 120, 1);
-}
-
 h1 {
   color: black;
 }
@@ -113,7 +109,7 @@ select:hover, input:hover, button:hover:enabled {
 
 .suggestion {
   background-color: white;
-  border: 1px solid rgb(255, 120, 1);
+  border: 0.18em solid rgba(255, 120, 1, 0.31);
   border-radius: 0.2em;
   padding: 10px;
   cursor: pointer;
@@ -123,11 +119,12 @@ select:hover, input:hover, button:hover:enabled {
 }
 
 .suggestion:hover {
-  border: 3px solid rgb(255, 120, 1);
+  border: 0.18em solid rgb(255, 120, 1);
+  transition: 0.2s;
 }
 
 .selected {
-  border: 3px solid rgb(255, 120, 1);
+  border: 0.18em solid rgb(255, 120, 1);
 }
 
 .disabled {

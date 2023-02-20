@@ -82,7 +82,7 @@ const Home = props => {
                 </Link>
 
 
-                <div className="samerow">
+                <div>
                     <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
                         itemToString={item => (item ? item.class : '')}
                     >
