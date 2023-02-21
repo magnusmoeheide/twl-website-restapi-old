@@ -8,19 +8,47 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background-color: rgb(241, 241, 241);
-  font-size: 2vh;
+  font-size: 2.2vh;
   height: 100%;
+}
+
+.errorMessage {
+  display: none;
+}
+
+@media only screen and (max-width: 800px), (max-height: 500px) {
+  .pageContent {
+    display: none;
+  }
+  
+  .errorMessage {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  height: 98vh !important;
+  height: 97vh !important;
 }
 
 
 .flexbox {
   flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  text-align: left;
+  padding: 0;
 }
 
 .noGrow {
@@ -181,15 +209,6 @@ label:hover {
   pointer-events: none;
 }
 
-.flexbox {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  text-align: left;
-  padding: 0;
-}
-
 .flexbox.sortFromLeft {
   padding: 0;
   margin: 0;
@@ -228,7 +247,7 @@ label:hover {
 
 .autoHeight {
   height: 28vw;
-  max-height: 40vh;
+  max-height: 36vh;
 }
 
 .item {
@@ -236,7 +255,7 @@ label:hover {
 }
 
 .groupList {
-  max-height: 10.5em;
+  max-height: 9em;
   overflow-y: scroll;
 }
 
@@ -311,8 +330,16 @@ label:hover {
 }
 
 .classesList {
-  max-height: 16em;
+  max-height: 12em;
   overflow-y: scroll;
+}
+
+.classesList.admin {
+  max-height: 20em;
+}
+
+.classesList ul {
+  margin-top: 0;
 }
 
 .inputSearchSchool, .inputWriteStudentName {
@@ -356,7 +383,7 @@ td {
   padding: 1em;
 }
 
-.conditionsTable {
+.conditionsTable, .statsTable {
   padding-top: 0;
   width: 100%;
 }
@@ -365,6 +392,12 @@ td {
   padding-left: 0;
   padding-top: 0.3em;
   padding-bottom: 1.5em;
+}
+
+.statsTable td {
+  padding-left: 0.4em;
+  padding-top: 0.3em;
+  padding-bottom: 1em;
 }
 
 .lastMap {
@@ -396,7 +429,7 @@ td {
 
 .studentGroup p span {
   color: rgb(255, 120, 1);
-  margin-right: 0.3em;
+  margin-right: 0em;
 }
 
 .studentGroup li {
@@ -409,7 +442,6 @@ td {
 
 .studentCount {
   margin-left: 1em;
-  border: 1px solid red;
 }
 
 .groupFirstBox, .groupSecondBox{
@@ -457,6 +489,18 @@ td {
 
 .negMarginLeft {
   margin-left: -0.3em;
+}
+
+.smallPaddingTop {
+  padding-top: 1em;
+}
+
+.paddingTop {
+  padding-top: 2em;
+}
+
+.xsPaddingLeft {
+  padding-left: 0.4em;
 }
 
 .minWidth30 {
@@ -566,3 +610,30 @@ input:checked + .slider:before {
 
 
 /* ---- switch end ---- */
+
+
+/* ---- ADMIN ----- */
+
+.copyBtn {
+  background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+	color: rgb(255, 120, 1);
+  padding: 0.25em;
+  margin-left: 0.5em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.copyBtn.copied {
+  background-color: rgb(255, 120, 1);
+  color: white;
+}
+
+.copyBtn.copied::after {
+  display: inline-block;
+  margin-left: 0.2em;
+  font-weight: bold;
+}
+
+
+/* ---- admin end ----- */

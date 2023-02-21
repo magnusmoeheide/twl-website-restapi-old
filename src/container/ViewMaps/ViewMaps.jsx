@@ -3,6 +3,7 @@ import Donkey from '../../assets/donkey.webp';
 import Cow from '../../assets/cow.jpeg';
 import Sheep from '../../assets/sheep.jpeg';
 import { Navbar } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ViewMaps = props => {
 
@@ -69,9 +70,9 @@ const ViewMaps = props => {
             </div>
             <div className="flexbox noGrow smallMarginBottom">
                 <div className="item">
-                    <button disabled={!selectedMap} onClick={openFullscreen}>Open Fullscreen</button>
+                    <button className="orangeBg" disabled={!selectedMap} onClick={openFullscreen}>Open Fullscreen <FontAwesomeIcon icon="fa-solid fa-up-right-and-down-left-from-center" /></button>
                     <a href={selectedImage} download>
-                        <button disabled={!selectedMap}>Print Map</button>
+                        <button className="orangeBg" disabled={!selectedMap}>Print Map <FontAwesomeIcon icon="fa-solid fa-print" /></button>
                     </a>
                 </div>
             </div>

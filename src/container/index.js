@@ -19,5 +19,5 @@ export {
     RegisterNewClass,
     OptionalConditions,
     GeneratedEditMap,
-    EditClass,
+    EditClass
 }

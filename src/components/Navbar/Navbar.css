@@ -1,7 +1,7 @@
 .appNavbar {
     display: flex;
     background-color: rgb(255, 120, 1);
-    height: 8vh;
+    min-height: 8vh !important;
     align-items: center;
     box-shadow: 3px 3px 5px grey;
 }

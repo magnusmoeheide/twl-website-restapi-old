@@ -5,7 +5,7 @@
     <link rel="icon" href="/smg-test/public/favicon.ico" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -32,7 +32,13 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div class="errorMessage">
+      <h2>Oh no!</h2>
+      <p>Your screen is too small or the ratio is off.</p>
+      <p>This app does not work on mobile devices.</p>
+      <p>Please switch to tablet or computer.</p>
+    </div>
+    <div class="pageContent" id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

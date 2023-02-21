@@ -105,7 +105,7 @@ const CreateNewMap = () => {
                 </div>   
             </div>
         </div>
-        <div className="flexbox noGrow">
+        <div className="flexbox center noGrow">
             <div className={selectedMyClass ? '' : 'disabled'}>
                 <h3 className="smallMarginTop black center">How should the seats be arranged?</h3>
                 <p>
