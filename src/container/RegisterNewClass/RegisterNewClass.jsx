@@ -1,30 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from '../../components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { createClass, getGrades } from '../../database';
+
 const RegisterNewClass = () => {
 
-    const SchoolGrades = [
-        {id: 1, grade: "Grade 1"},
-        {id: 2, grade: "Grade 2"},
-        {id: 3, grade: "Grade 3"},
-        {id: 4, grade: "Grade 4"},
-    ]
+    //----------------------------------------------
 
+    const [schoolGrades, setSchoolGrades] = useState([]);
+    const [classes, setClasses] = useState([]);
+
+    useEffect(() => {
+        getGrades(setSchoolGrades);
+    }, []);
+
+  // -----------------------------------------------
+/*
     const [savedClass, setSavedClass] = useState({
         Teacher:"",
         Grade:"",
+        School: "",
         ClassName:"",
         Students:[]
     });
-
-    const [grade, setGrade] = useState('');
+*/
     const [nameClass, setNameClass] = useState('');
     const [inputStudent, setInputStudent] = useState('');
+    const [teacherId, setTeacherId] = useState('1');//should change according to login details
+    const [gradeId, setGradeId] = useState('1');
+    const [schoolId, setSchoolId] = useState('1');//should change according to login details
+
 
     const handleGradeChange = event => {
         setSelectedSchoolGrade(event.target.value);
-        setGrade(event.target.value)
+        setGradeId(event.target.value)
     }
     const handleClassChange = event => {
         setNameClass(event.target.value);
@@ -42,23 +52,24 @@ const RegisterNewClass = () => {
                 alert("Write a name");
             } else {
                 setStudentList([inputStudent, ...studentList]);
-                console.log(studentList);
                 document.getElementById("studentnameinput").value="";
             }
-            
+            console.log(studentList)
         }
     }
 
     const handleSave = event => {
+/*
         setSavedClass({
-            Teacher: "Cem",
-            Grade: grade,
+            Teacher: teacherId,
+            Grade: gradeId,
+            School: schoolId,
             ClassName: nameClass,
             Students: studentList
         })
-        console.log(savedClass);
+*/
+        createClass( nameClass, gradeId, teacherId, schoolId, studentList);
     }
-
 
   return (
     <div>
@@ -74,11 +85,11 @@ const RegisterNewClass = () => {
                     <p>What grade is the class in?
                         <select value={selectedSchoolGrade} onChange={handleGradeChange}>
                             <option value="" disabled>Choose Grade</option>
-                            {SchoolGrades.map(g => (
-                            <option key={g.id} value={g.grade}>
-                                {g.grade}
+                            {schoolGrades.map((grade) => (
+                            <option key={grade.id} value={grade.id}>
+                                {grade.name}
                             </option>
-                        ))}
+                            ))}
                         </select>
                     </p>
                 </div>
@@ -91,7 +102,7 @@ const RegisterNewClass = () => {
 
                 <div>
                     <p>Enter Student Names
-                    <input type="text"id="studentnameinput" className="inputWriteStudentName" placeholder="Write one name and click Enter" onKeyDown={handleKeyDown} onChange={handleStudentChange} />
+                    <input type="text" id="studentnameinput" className="inputWriteStudentName" placeholder="Write one name and click Enter" onKeyDown={handleKeyDown} onChange={handleStudentChange} />
                     </p>
                 </div>
 
