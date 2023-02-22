@@ -24,7 +24,6 @@ const EditClass = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
     const [type, setType] = useState(null);
-    const [confirmed, setConfirmed] = useState(false);
     /* -----  popup message end ----- */
 
     const [selectedMyClass, setSelectedMyClass] = useState('');

@@ -100,8 +100,13 @@ const AdminHome = () => {
                         </p>
                     </div>
                     <h3>Settings</h3>
-                    <button className="orangeBg">Manage Teacher Accounts <FontAwesomeIcon icon="fa-solid fa-chalkboard-user" /></button>
-                    <button className="orangeBg">Manage Grades <FontAwesomeIcon icon="fa-solid fa-graduation-cap" /></button>
+                    <Link to="/adminmanageteachers">
+                        <button className="orangeBg">Manage Teacher Accounts <FontAwesomeIcon icon="fa-solid fa-chalkboard-user" /></button>
+                    </Link>
+                    <Link to="/adminmanagegrades">
+                        <button className="orangeBg">Manage Grades <FontAwesomeIcon icon="fa-solid fa-graduation-cap" /></button>
+                    </Link>
+                    
                 </div>
 
                 <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
@@ -144,7 +149,7 @@ const AdminHome = () => {
             </div>
             <div className="item paddingTop side right">
                 <p>School: Skullerud skole</p>
-                <p>Current school year: 2023/2024</p>
+                <p>School year: 2023/2024</p>
             </div>
         </div>
     </div>

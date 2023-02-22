@@ -16,13 +16,24 @@ const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
                 </div>
             );
         break;
+        case 'warning-confirm':
+            icon = (
+                <div className="icon-container">
+                    <span>Are you sure? </span>
+                    <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" className="warning-confirm"/>
+                    <p>{message}</p>
+                    <button onClick={onConfirm}>Delete teacher <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
+                    <button onClick={onClose}>Go back <FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>        
+                </div>
+            );
+        break;
         case 'confirm':
             icon = (
                 <div className="icon-container">
                     <FontAwesomeIcon icon="fa-solid fa-circle-confirm" className="confirm"/>
                     <span className="icon-text">Please confirm</span>
                     <p>{message}</p>
-                    <button onClick={onConfirm}>Delete student <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
+                    <button onClick={onConfirm}>Delete <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
                     <button onClick={onClose}>Go back <FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>        
                 </div>
             );

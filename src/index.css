@@ -1,3 +1,4 @@
+
 body {
   overflow: hidden;
   margin: 0;
@@ -10,28 +11,6 @@ body {
   background-color: rgb(241, 241, 241);
   font-size: 2.2vh;
   height: 100%;
-}
-
-.errorMessage {
-  display: none;
-}
-
-@media only screen and (max-width: 800px), (max-height: 500px) {
-  .pageContent {
-    display: none;
-  }
-  
-  .errorMessage {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.5em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .container {
@@ -118,6 +97,10 @@ h4 {
 
 .black {
   color: black;
+}
+
+.red {
+  color: red;
 }
 
 
@@ -207,6 +190,10 @@ label:hover {
 .lastMap.disabled {
   opacity: 0.6;
   pointer-events: none;
+}
+
+.sortFromLeft {
+  text-align: left;
 }
 
 .flexbox.sortFromLeft {
@@ -383,7 +370,7 @@ td {
   padding: 1em;
 }
 
-.conditionsTable, .statsTable {
+.conditionsTable, .statsTable, .teachersTable {
   padding-top: 0;
   width: 100%;
 }
@@ -398,6 +385,32 @@ td {
   padding-left: 0.4em;
   padding-top: 0.3em;
   padding-bottom: 1em;
+}
+
+.teachersTable {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.teachersTable th {
+  text-align: left;
+}
+
+.teachersTable td {
+  border: 1px solid black;
+  padding: 0.2em;
+  padding-right: 3em;
+  margin-bottom: 0.3em;
+  border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+}
+
+.deleteTeacher td {
+  text-align: right;
+}
+
+.deleteTeacher button {
+  margin: 0;
+  padding: 0.2em;
 }
 
 .lastMap {

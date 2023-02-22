@@ -47,7 +47,11 @@
 
   .popup-message-warning {
     color: rgb(255, 120, 1);
-  }  
+  }
+  
+  .popup-message-warning-confirm {
+    color: red;
+  }
 
   .popup-message-confirm {
     color: rgb(255, 120, 1);
