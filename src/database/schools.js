@@ -1,6 +1,6 @@
-// Make a GET request to get grades from the database
-function getGrades(variable) {
-    fetch('http://localhost:3001/grades')
+// Make a GET request to get schools from the database
+function getSchools(variable) {
+    fetch('http://localhost:3001/schools')
     .then(response => response.json())
     .then(data => {
       variable(data);
@@ -11,14 +11,14 @@ function getGrades(variable) {
     });  
 }
 
-// Make a POST request to add a new grade to the database
-function createGrade(setvariable, name, school_id, school_year) {
-    fetch('http://localhost:3001/grades', {
+// Make a POST request to add a new school to the database
+function createSchool(setvariable, name, admin_id) {
+    fetch('http://localhost:3001/schools', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, school_id, school_year})
+        body: JSON.stringify({name, admin_id})
     })
     .then(response => {
         return response.text();
@@ -33,9 +33,9 @@ function createGrade(setvariable, name, school_id, school_year) {
     });
 }
 
-// Make a PUT request to update an existing grade in the database
-function updateGrade(newname, id) {
-    fetch(`http://localhost:3001/grades/${id}`, {
+// Make a PUT request to update an existing school in the database
+function updateSchool(newname, id) {
+    fetch(`http://localhost:3001/schools/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -46,16 +46,16 @@ function updateGrade(newname, id) {
     })
     .then(response => response.json())
     .then(data => {
-    console.log('Success:', data);
+    console.log(data);
     })
     .catch((error) => {
     console.error('Error:', error);
     });
 }
 
-// Make a DELETE request to remove a grade from the database
-function deleteGrade(id) {
-    fetch(`http://localhost:3001/grades/${id}`, {
+// Make a DELETE request to remove a school from the database
+function deleteSchool(id) {
+    fetch(`http://localhost:3001/schools/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.text())
@@ -68,8 +68,8 @@ function deleteGrade(id) {
 }
 
 export {
-    getGrades,
-    createGrade,
-    updateGrade,
-    deleteGrade,
+    getSchools,
+    createSchool,
+    updateSchool,
+    deleteSchool,
 }

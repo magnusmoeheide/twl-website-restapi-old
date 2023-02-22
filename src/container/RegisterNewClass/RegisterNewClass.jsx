@@ -9,7 +9,6 @@ const RegisterNewClass = () => {
     //----------------------------------------------
 
     const [schoolGrades, setSchoolGrades] = useState([]);
-    const [classes, setClasses] = useState([]);
 
     useEffect(() => {
         getGrades(setSchoolGrades);
