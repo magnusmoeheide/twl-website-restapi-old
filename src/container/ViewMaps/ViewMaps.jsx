@@ -3,6 +3,7 @@ import Donkey from '../../assets/donkey.webp';
 import Cow from '../../assets/cow.jpeg';
 import Sheep from '../../assets/sheep.jpeg';
 import { Navbar } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ViewMaps = props => {
 
@@ -35,33 +36,48 @@ const ViewMaps = props => {
 
 
     return (
-        <div>
+        <div className="container">
             <Navbar title="View Maps"/>
-            <br />
-            <select onChange={handleSelectChange}>
-                <option selected="true" disabled="disabled">Choose map</option>
-                {MyMaps.map((map) => (
-                <option key={map.id} value={map.map}>
-                    {map.map} (Created on {map.created})
-                </option>
-                ))}
-            </select>
-            <button disabled={!selectedMap} onClick={openFullscreen}>Open Fullscreen</button>
-            <a href={selectedImage} download>
-                <button disabled={!selectedMap}>Print Map</button>
-            </a>
-
-            <div className='info'>
-                {selectedMap && (
-                    <h2>{selectedMap}</h2>
-                )}
+            <div className="flexbox">
+                <div className="item fullWidth">
+                    <div className="flexbox noGrow">
+                        <div className="item side left">
+                            {selectedMap && (
+                                <h2>{selectedMap}</h2>
+                            )}
+                        </div>
+                        <div className="item">
+                            <select onChange={handleSelectChange} className="smallMarginTop">
+                            <option selected="true" disabled="disabled">Choose map</option>
+                            {MyMaps.map((map) => (
+                            <option key={map.id} value={map.map}>
+                                {map.map} (Created on {map.created})
+                            </option>
+                            ))}
+                            </select>
+                        </div>
+                        <div className="item side right"></div>
+                    </div>
+                    <div className="flexbox">
+                        <div id="yourmap" className="item" ref={mapRef}>
+                            {selectedImage && (
+                                <img src={selectedImage} alt={selectedMap} id="fullscreenmap"/>
+                            )}
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
-
-            <div id="yourmap" ref={mapRef}>
-                {selectedImage && (
-                    <img src={selectedImage} alt={selectedMap} id="fullscreenmap"/>
-                )}
+            <div className="flexbox noGrow smallMarginBottom">
+                <div className="item">
+                    <button className="orangeBg" disabled={!selectedMap} onClick={openFullscreen}>Open Fullscreen <FontAwesomeIcon icon="fa-solid fa-up-right-and-down-left-from-center" /></button>
+                    <a href={selectedImage} download>
+                        <button className="orangeBg" disabled={!selectedMap}>Print Map <FontAwesomeIcon icon="fa-solid fa-print" /></button>
+                    </a>
+                </div>
             </div>
+            
+        
        
         </div>       
     

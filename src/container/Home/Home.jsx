@@ -44,14 +44,14 @@ const Home = props => {
 
 
     return (
-      <div>
+      <div className="container">
         <Navbar title="Home"/>
         <div className="flexbox fullHeight">
             <div className="item side left">
             </div>
             <div className="item">
                 <div className="flexbox">
-                    <div className="item">
+                    <div className="item smallMarginTop">
                         <img src={Logo} alt="" className='logo' />
                     </div>
                 </div>
@@ -62,7 +62,7 @@ const Home = props => {
                     </Link>
                 </div>
 
-                <h3>
+                <h3 className="smallMarginTop">
                     My classes
                 </h3>
 
@@ -77,11 +77,12 @@ const Home = props => {
                 <Link to="/viewmaps">
                     <button className="orangeBg" disabled={!selectedMyClass}>View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" /></button>
                 </Link>
-                <button className="orangeBg" disabled={!selectedMyClass}>Edit Class <FontAwesomeIcon icon="fa-solid fa-users-gear" /></button>  
-            
+                <Link to="/editclass">
+                    <button className="orangeBg" disabled={!selectedMyClass}>Edit Class <FontAwesomeIcon icon="fa-solid fa-users-gear" /></button>  
+                </Link>
 
 
-                <div className="samerow">
+                <div>
                     <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
                         itemToString={item => (item ? item.class : '')}
                     >
@@ -126,7 +127,6 @@ const Home = props => {
                 <p>Account: Teacher</p> 
             </div>
         </div>
-
     </div>
     );
 

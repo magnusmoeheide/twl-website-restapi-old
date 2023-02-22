@@ -7,6 +7,7 @@ import CreateNewMap from './CreateNewMap/CreateNewMap';
 import RegisterNewClass from './RegisterNewClass/RegisterNewClass';
 import OptionalConditions from './OptionalConditions/OptionalConditions';
 import GeneratedEditMap from './GeneratedEditMap/GeneratedEditMap';
+import EditClass from './EditClass/EditClass';
 
 export {
     ViewMaps,
@@ -18,4 +19,5 @@ export {
     RegisterNewClass,
     OptionalConditions,
     GeneratedEditMap,
+    EditClass
 }

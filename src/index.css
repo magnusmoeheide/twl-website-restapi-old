@@ -1,3 +1,4 @@
+
 body {
   overflow: hidden;
   margin: 0;
@@ -8,9 +9,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background-color: rgb(241, 241, 241);
-  font-size: 1vw;
+  font-size: 2.2vh;
+  height: 100%;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 97vh !important;
+}
+
+
+.flexbox {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  text-align: left;
+  padding: 0;
+}
+
+.noGrow {
+  flex-grow: 0;
+}
 
 button {	
   font-size: 1em;
@@ -58,6 +80,10 @@ h1 {
   color: black;
 }
 
+h2 {
+  margin-top: 0.2em;
+}
+
 h3 {
   color: rgb(255, 120, 1);
   margin: 0.3em;
@@ -66,12 +92,15 @@ h3 {
 }
 
 h4 {
-  font-size: 0.9em;
-
+  font-size: 1em;
 }
 
 .black {
   color: black;
+}
+
+.red {
+  color: red;
 }
 
 
@@ -85,16 +114,34 @@ select:focus, input:focus {
 
 select:hover, input:hover, button:hover:enabled {
   cursor: pointer;
-  box-shadow: 0 0 11px rgba(33,33,33,.2);
+  box-shadow: 0 0 0.8em rgba(33,33,33,.2);
   transition: 0.2s;
 }
 
+.suggestion {
+  background-color: white;
+  border: 0.18em solid rgba(255, 120, 1, 0.31);
+  border-radius: 0.2em;
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.suggestion:hover {
+  border: 0.18em solid rgb(255, 120, 1);
+  transition: 0.2s;
+}
+
+.selected {
+  border: 0.18em solid rgb(255, 120, 1);
+}
 
 .disabled {
   opacity: 0.6;
   pointer-events: none;
 }
-
 
 .hidden {
   visibility: hidden;
@@ -124,6 +171,17 @@ input::placeholder {
   color: black;
 }
 
+label input {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  vertical-align: middle;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+
 #checkbox {
   accent-color: rgb(255, 120, 1);
   color: white;
@@ -134,13 +192,8 @@ input::placeholder {
   pointer-events: none;
 }
 
-.flexbox {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+.sortFromLeft {
   text-align: left;
-  padding: 0.5em 0;
 }
 
 .flexbox.sortFromLeft {
@@ -176,17 +229,68 @@ input::placeholder {
 
 .aThird {
   width: 28vw;
-  height: 38vh;
+  height: 45vh;
+}
+
+.autoHeight {
+  height: 28vw;
+  max-height: 36vh;
 }
 
 .item {
   order: 1;
-  border: 1px solid black;
 }
+
+.groupList {
+  max-height: 9em;
+  overflow-y: scroll;
+}
+
+/* EDIT CLASS */
+
+.item.editClass {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editStudentBtn, .deleteStudentBtn, .editStudentInput {
+  margin: 0;
+  padding: 0.3em;
+  margin-bottom: 0.2em;
+  margin-left: 0.2em;
+}
+
+.editStudentInput {
+  margin-left: 0;
+}
+
+.editClass {
+  padding-left: 0.2em;
+  background-color: transparent;
+  border: 0;
+}
+
+.editClass li {
+  margin-bottom: 0.2em;
+  padding: 0.2em;
+  background-color: transparent;
+  margin-bottom: 0.3em;
+  border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+}
+
+.noMarginLeft {
+  margin-left: 0;
+}
+
+
+/* -- edit class end -- */
 
 .side {
   padding-top: 1em;
-  width: 20%;
+  margin-right: 2em;
+  max-width: 20%;
+  flex-grow: 1;
 } 
 
 .selectAndBtn {
@@ -213,16 +317,16 @@ input::placeholder {
 }
 
 .classesList {
-  max-height: 250px; /* ISSUE */
+  max-height: 12em;
   overflow-y: scroll;
 }
 
-.suggestion {
-  height: 17em;
-  width: 17em;
-  border: 0.15em solid rgba(255, 120, 1, 0.31);
-  border-radius: 0.4em;
-  text-align: center;
+.classesList.admin {
+  max-height: 20em;
+}
+
+.classesList ul {
+  margin-top: 0;
 }
 
 .inputSearchSchool, .inputWriteStudentName {
@@ -233,11 +337,16 @@ input::placeholder {
   min-width: 12em;
 }
 
+.studentName span {
+  margin-left: 0.6em;
+}
+
 .goBack {
   background-color: white;
   color: rgb(255, 120, 1);
   border: 0.15em solid rgba(255, 120, 1, 0.31);
 }
+
 
 ul {
   display: table;
@@ -257,6 +366,70 @@ li {
   margin-bottom: 1.2em;
 }
 
+td {
+  padding: 1em;
+}
+
+.conditionsTable, .statsTable, .teachersTable {
+  padding-top: 0;
+  width: 100%;
+}
+
+.conditionsTable td {
+  padding-left: 0;
+  padding-top: 0.3em;
+  padding-bottom: 1.5em;
+}
+
+.statsTable td {
+  padding-left: 0.4em;
+  padding-top: 0.3em;
+  padding-bottom: 1em;
+}
+
+.teachersTable {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.teachersTable th {
+  text-align: left;
+}
+
+.teachersTable td {
+  border: 1px solid black;
+  padding: 0.2em;
+  padding-right: 3em;
+  margin-bottom: 0.3em;
+  border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+}
+
+.deleteTeacher td {
+  text-align: right;
+}
+
+.deleteTeacher button {
+  margin: 0;
+  padding: 0.2em;
+}
+
+.lastMap {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.lastMap.show {
+  opacity: 1;
+  max-height: 5em; /* or any other value that fits your needs */
+}
+
+
+.student-name {
+  flex-grow: 1;
+}
+
 .studentGroup {
   margin-left: -0.6em;
   width: 100%;
@@ -264,10 +437,12 @@ li {
 
 .studentGroup p {
   margin-top: 0;
+  margin-bottom: 0.2em;
 }
 
 .studentGroup p span {
   color: rgb(255, 120, 1);
+  margin-right: 0em;
 }
 
 .studentGroup li {
@@ -276,6 +451,10 @@ li {
   border-bottom: 0;
   padding: 0;
   margin: 0;
+}
+
+.studentCount {
+  margin-left: 1em;
 }
 
 .groupFirstBox, .groupSecondBox{
@@ -311,6 +490,34 @@ li {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.smallMarginTop {
+  margin-top: 1em;
+}
+
+.smallMarginBottom {
+  margin-bottom: 1em;
+}
+
+.negMarginLeft {
+  margin-left: -0.3em;
+}
+
+.smallPaddingTop {
+  padding-top: 1em;
+}
+
+.paddingTop {
+  padding-top: 2em;
+}
+
+.xsPaddingLeft {
+  padding-left: 0.4em;
+}
+
+.minWidth30 {
+  min-width: 30vw;
 }
 
 /* ----- concrete styling end -------- */
@@ -351,3 +558,95 @@ li {
 }
 
 /* ------- icons end ------------ */
+
+
+
+/* ----- SWITCH START ------ */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 1.875em;
+  height: 1.063em;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  transition: 0.4s;
+  border-radius: 1.063em;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 0.813em;
+  width: 0.813em;
+  left: 0.125em;
+  bottom: 0.125em;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.03125em green;
+}
+
+input:checked + .slider:before {
+  transform: translateX(0.813em);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1.063em;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/* ---- switch end ---- */
+
+
+/* ---- ADMIN ----- */
+
+.copyBtn {
+  background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+	color: rgb(255, 120, 1);
+  padding: 0.25em;
+  margin-left: 0.5em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.copyBtn.copied {
+  background-color: rgb(255, 120, 1);
+  color: white;
+}
+
+.copyBtn.copied::after {
+  display: inline-block;
+  margin-left: 0.2em;
+  font-weight: bold;
+}
+
+
+/* ---- admin end ----- */
