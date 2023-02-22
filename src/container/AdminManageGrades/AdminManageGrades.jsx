@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { images } from '../../constants';
+import { Navbar } from '../../components';
 import { getGrades, createGrade, deleteGrade } from '../../database';
 
 const AdminAddGrade = () => {
@@ -46,6 +47,7 @@ useEffect(() => {
 
   return (
     <div className="adminAddGrades">
+      <Navbar title="Manage Grades"/>
         <h1>Admin - Manage Grades</h1>
         
         <p>As school admin you should create all grades at the beginning of the school year.</p>

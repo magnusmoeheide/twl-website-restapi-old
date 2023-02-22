@@ -26,7 +26,7 @@ function createSchool(setvariable, name, admin_id) {
     .then(data => {
         console.log('Success:', data);
         //alert(data);
-        getGrades(setvariable);
+        getSchools(setvariable);
     })
     .catch((error) => {
         console.error('Error:', error);
