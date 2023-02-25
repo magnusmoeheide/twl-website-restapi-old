@@ -14,6 +14,7 @@
     padding: 1.5em;
     box-shadow: 0em 0em 1em rgba(0, 0, 0, 0.5);
     border-radius: 0.5em;
+    min-width: 30vw;
   }
 
   .popup-message-icon {
@@ -53,7 +54,7 @@
     color: red;
   }
 
-  .popup-message-confirm {
+  .popup-message-confirm, .popup-message-confirm-create {
     color: rgb(255, 120, 1);
   }
   

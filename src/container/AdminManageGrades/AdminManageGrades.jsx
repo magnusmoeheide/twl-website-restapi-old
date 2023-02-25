@@ -1,29 +1,55 @@
 import React, { useState, useEffect } from 'react';
-
-import { images } from '../../constants';
 import { Navbar } from '../../components';
-import { getGrades, createGrade, deleteGrade } from '../../database';
+import { getGrades, createGrade } from '../../database';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AdminAddGrade = () => {
   const [input, setInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [schoolYear, setSchoolYear] = useState('');
 
+
+  const [grades, setGrades] = useState([
+    { id: 1, name: 'Grade 8'},
+    { id: 2, name: 'Grade 9'},
+    { id: 3, name: 'Grade 10'}
+  ]);
+
 //---------------------------------------------------------
 
 const [school_id, setSchoolId] = useState('1');
 
 const [schoolGradesdb, setSchoolGradesdb] = useState([]);
-
 useEffect(() => {
     getGrades(setSchoolGradesdb);
 }, []);
 
 //-----------------------------------------------------------
 
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const handleSchoolYearChange = (event) => {
     setSchoolYear(event.target.value);
   };
+
+    const handleSaveYear = (event) => {
+      event.preventDefault();
+      if (schoolYear.trim() === "") {
+        setErrorMessage("Woopsie! School year is not valid.");
+        return;
+      }
+      setIsEditMode(true);
+    };
+
+    const handleEditYear = () => {
+      setIsEditMode(true);
+    };
+
+    const handleDeleteGrades = () => {
+      setIsEditMode(false);
+      setSchoolYear("");
+      setErrorMessage("");
+    };
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -32,7 +58,7 @@ useEffect(() => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (input === '') {
-        setErrorMessage('Input cannot be empty.');
+        setErrorMessage('Woopsie! Input cannot be empty.');
         return;
     }
     createGrade(setSchoolGradesdb, input, school_id, schoolYear);
@@ -40,71 +66,80 @@ useEffect(() => {
     setErrorMessage('');
   };
 
-  const handleDelete = (event) => {
-    deleteGrade(event.target.value);
-    getGrades(setSchoolGradesdb);
-  }
 
   return (
-    <div className="adminAddGrades">
-      <Navbar title="Manage Grades"/>
-        <h1>Admin - Manage Grades</h1>
-        
-        <p>As school admin you should create all grades at the beginning of the school year.</p>
-        <p>You can only remove individual grades if a teacher has not created a class in that grade.</p>
-        <p>
-            School Year:
-            <input type="text" placeholder="F.eks 2023/2024" value={schoolYear} onChange={handleSchoolYearChange} />
-            <button>Delete All Grades</button>
-
-            <br /><br />
-            Only delete all grades at the end of the school year when the students change grades.
-        </p>
-    
-        <br />
-        <table>
-          <tbody>
-            <tr>
-              <td colSpan={2}>
-                <p>You can only remove individual grades if a teacher has not created a class in that grade.</p>
-              </td>
-            </tr>
-            <tr>
-              <td rowSpan={2}>
-                <h3>Manage Grades</h3>
-                <form className="adminAddGradesContainer">
-                    {schoolGradesdb.map((item) => (
-                    <ul>
-                        <li>
-                            <div key={item.name}>
-                            <label>
-                                <p
-                                value={item.name}
-                                id={item.name}
-                                data-id={item.id}
-                                />
-                                {item.name}
-                            </label>
-                            </div>
-                            <img src={images.XIcon} value={item.id} onClick={handleDelete} style={{"height":"3vh"}}/>
-                        </li>
-                    </ul>
-                    ))}
+    <div className="container">
+      <Navbar title="Admin - Manage Grades"/>
+      <div className="flexbox">
+        <div className="item aThirdTwoCols fullHeight">
+          <div className="flexbox manageGradesBox">
+            <div className="item">
+              <span className="info"><FontAwesomeIcon icon="fa-solid fa-circle-info" /></span>
+              <p>
+                As school admin you should create all grades at the beginning of the school year.
+              </p>
+            </div>
+            <div className="item">
+                <h3>School year</h3>
+                <form>
+                  <input type="text" value={schoolYear} onChange={handleSchoolYearChange} />
+                  <button onClick={isEditMode ? handleEditYear : handleSaveYear}>
+                    {isEditMode ? "Edit Year" : "Save Year"}
+                  </button>
                 </form>
-              </td>
+            </div>
+          </div>
 
-              <td>
-                <p>Or you can add your own grades:</p>
-                <form onSubmit={handleSubmit}>
-                  {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                  <input type="text" value={input} onChange={handleInputChange} />
-                  <button type="submit">Add Grade</button>
-                </form>
-              </td>
-    
-            </tr>
-          </tbody>
-        </table>
+          <div className="flexbox manageGradesBox">
+            <div className="item">
+              <span className="warning"><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /></span>
+              <p>
+                Once you add a grade, you cannot delete that grade until the end of the school year. 
+              </p>
+            </div>
+            <div className="item halfWidth">
+              <h3>Add grades</h3>
+              <form onSubmit={handleSubmit}>
+                <input type="text" value={input} onChange={handleInputChange} />
+                <button type="submit">Add Grade</button>
+              </form>
+            </div>
+          </div> 
+          {isEditMode && (
+            <>
+          <div className="flexbox manageGradesBox">
+            <div className="item halfWidth">
+              <span className="warning"><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /></span>
+              <p>Only delete all grades at the end of the school year when the students change grades.</p>
+            </div>
+            <div className="item halfWidth">
+              <h3>Delete grades</h3>
+              <button onClick={handleDeleteGrades}>Delete All Grades</button>
+            </div>
+          </div>
+          </>
+          )}
+        </div>
+
+        <div className="item aThird fullHeight">
+          <h3>Registered grades</h3>
+          {errorMessage && <p className="error">{errorMessage}</p>}
+          {grades.map((item) => (
+          <ul className="registeredGrades">
+            <li key={item.name}>
+              <label>
+                  <p
+                  value={item.name}
+                  id={item.name}
+                  data-id={item.id}
+                  />
+                  {item.name}
+              </label>
+            </li>
+          </ul>
+        ))}
+        </div>
+      </div>
     </div>
   );
 };

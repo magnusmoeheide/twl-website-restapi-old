@@ -7,9 +7,22 @@ import { PopupMessage } from '../../components';
 const AdminManageTeachers = () => {
   
     const [teachers, setTeachers] = useState([
-        { id: 1, name: 'John Doe', classes: ['8A','8B']},
-        { id: 2, name: 'Jane Doe', classes: ['8C','8D', '8E']},
-        { id: 3, name: 'Jim Smith', classes: ['9th grade French','9A', '9B']},
+        { id: 1, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 2, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 3, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 4, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 5, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 6, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 7, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 8, name: 'Hans Eriksen', classes: ['8A','8B']},
+        { id: 9, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 10, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 11, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 12, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 13, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 14, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 15, name: 'Elli Andersen Jenssen', classes: ['8C','8D', '8E']},
+        { id: 16, name: 'Peter Hansen', classes: ['9th grade French','9A', '9B', '8th grade French', '9th grade sports']},
     ]);
 
     const handleClosePopup = () => {
@@ -27,7 +40,7 @@ const AdminManageTeachers = () => {
         setMessage(
             <>
                 Are you really sure you want to delete the teacher?<br /><br />
-                This action cannot be undone and the teacher will lose all their maps and classes.
+                <b>This action cannot be undone and the teacher will lose all their maps and classes.</b>
             </>);
         setShowPopup(true);
         setIndexToDelete(id);
@@ -51,41 +64,23 @@ const AdminManageTeachers = () => {
         <Navbar title="Admin - Manage Teachers"/>
         <div className="flexbox smallPaddingTop">
             <div className="item side left">
-                <div className="flexbox noGrow">
-                    <div className="item">
-                        <b><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> Deleting a teacher results in all their classes and maps getting removed.</b>
-                        <p>You should only delete a teacher if they have left the school, or if they should not have access.</p>
-                    </div>
+                <div>
+                    <b><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> Deleting a teacher results in all their classes and maps getting removed.</b>
+                    <p>You should only delete a teacher if they have left the school, or if they should not have access.</p>
                 </div>
             </div>
-            <div className="item smallPaddingTop">
-                <table className="teachersTable">
-                <thead>
-                    <tr>
-                        <th>Teacher</th>
-                        <th>Registered classes</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div className="item smallMarginTop teachersList">
+                <ul>
                     {teachers.map((teacher) => (
-                    <tr key={teacher.id}>
-                        <td>{teacher.name}</td>
-                        <td className="sortFromLeft">
-                            <div>
-                                {teacher.classes.map((cls, index) => (
-                                <span key={cls}>
-                                    {cls}{index !== teacher.classes.length - 1 && ', '}
-                                </span>
-                                ))}
-                            </div>
-                        </td>
-                        <td className="deleteTeacher">
-                            <button onClick={() => deleteTeacher(teacher.id)}>Delete</button>
-                        </td>
-                    </tr>
+                        <li key={teacher.id}>
+                        <div className="teacherInfo">
+                            <span className="teacherName">{teacher.name}</span>
+                            <span className="teacherClasses">Classes: {teacher.classes.join(', ')}</span>
+                        </div>
+                        <button className="deleteTeacherBtn" onClick={() => deleteTeacher(teacher.id)}>Delete</button>
+                        </li>
                     ))}
-                </tbody>
-                </table>
+                </ul>
             </div>
             <div className="item side right">
                 <p>Registered teachers: 40</p>

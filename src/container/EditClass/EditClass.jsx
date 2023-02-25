@@ -7,11 +7,11 @@ import { PopupMessage } from '../../components';
 
 
 const MyClasses = [
-    {id: 1, class: '10C', teacher: 'Magnus', students: ['John', 'Alex', 'Sara']},
-    {id: 2, class: '10D', teacher: 'Magnus', students: ['Emily', 'Jacob', 'Sophia']},
-    {id: 3, class: '10E', teacher: 'Magnus', students: ['William', 'Ava', 'Ethan']},
-    {id: 4, class: '9th Grade French', teacher: 'Magnus', students: ['Mia', 'Oliver', 'Isabella']},
-    {id: 5, class: '10th Grade French', teacher: 'Magnus', students: ['Charlotte', 'Liam', 'Emma']},
+    {id: 1, class: '10C', teacher: 'Magnus', students: ['John', 'Alex', 'Sara', 'Emily', 'Jacob', 'Sophia', 'Emily', 'Jacob', 'Charlotte', 'Liam', 'Emma']},
+    {id: 2, class: '10D', teacher: 'Magnus', students: ['Emily', 'Jacob', 'Sophia', 'Charlotte', 'Liam', 'Emma']},
+    {id: 3, class: '10E', teacher: 'Magnus', students: ['William', 'Ava', 'Ethan', 'Emily', 'Jacob', 'Sophia']},
+    {id: 4, class: '9th Grade French', teacher: 'Magnus', students: ['Mia', 'Oliver', 'Isabella', 'Emily', 'Jacob', 'Sophia']},
+    {id: 5, class: '10th Grade French', teacher: 'Magnus', students: ['Charlotte', 'Liam', 'Emma', 'Emily', 'Jacob', 'Sophia']},
 ]
 
 
@@ -31,6 +31,9 @@ const EditClass = () => {
     const [editedName, setEditedName] = useState('');
     const [editedIndex, setEditedIndex] = useState(-1);
     const [indexToDelete, setIndexToDelete] = useState(-1);
+    const [newStudentName, setNewStudentName] = useState('');
+    const [showAddStudentForm, setShowAddStudentForm] = useState(false);
+
 
     const inputRef = useRef(null);
 
@@ -67,14 +70,27 @@ const EditClass = () => {
         const updatedStudents = [...selectedClassStudents];
         updatedStudents[editedIndex] = editedName;
         setSelectedClassStudents(updatedStudents);
-        setEditedName('');
-        setEditedIndex(-1);
-    }
+        setEditedIndex(null);
+        setEditedName({ name: ""});
+      };
+
+    const handleAddStudent = () => {
+        if (newStudentName.trim() === '') {
+          setType('warning');
+          setMessage('Please enter a name.');
+          setShowPopup(true);
+          return;
+        }
+        const updatedStudents = [...selectedClassStudents, newStudentName];
+        setSelectedClassStudents(updatedStudents);
+        setNewStudentName('');
+        setShowAddStudentForm(false); // Hide the form again
+    };
 
 
     return (
         <div className="container">
-            {showPopup && type === 'confirm' && (
+            {showPopup && (
                 <PopupMessage
                 message={message}
                 type={type}
@@ -85,41 +101,65 @@ const EditClass = () => {
             <Navbar title="Edit Class"/>
             <div className="flexbox">
                 <div className="item minWidth30">
-                   
-                    <h3>Choose class
-                        <select class="select" value={selectedMyClass} onChange={handleClassChange}>
-                            <option value="" disabled>Choose Class</option>
-                            {MyClasses.map(t => (
-                            <option key={t.id} value={t.class}>
-                                {t.class}
-                            </option>
-                            ))}
-                        </select>
-                    </h3>
-                        
-                    {selectedMyClass && (
-                        <h3>Students ({selectedClassStudents.length})</h3>
-                    )}
-                    <ul className="editClass">
-                        {selectedClassStudents.map((student, index) => (
-                            <li key={index}>
-                                {editedIndex === index ? (
-                                <div className="item editClass">
-                                    <input class="editStudentInput" type="text" ref={inputRef} value={editedName} onChange={(e) => setEditedName(e.target.value)} />
-                                    <button class="editStudentBtn orangeBg" onClick={handleSave}>Save</button>
-                                </div>
-                                ) : (
-                                <div className="item editClass">                                    
-                                    <div className="studentName"><FontAwesomeIcon icon="fa-solid fa-child" /><span>{student}</span></div>
-                                    <div className="button-container">
-                                        <button class="editStudentBtn" onClick={() => handleEdit(index)}>Edit</button>
-                                        <button class="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete</button>   
-                                    </div>
-                                </div>
-                                )}
-                            </li>
-                        ))}
+                    <ul className="editClass noBorderBottom">
+                        <li>
+                            <div className="item editClass">
+                                <h3>Choose class</h3>
+                                <select className="select halfWidth" value={selectedMyClass} onChange={handleClassChange}>
+                                    <option value="" disabled>Choose Class</option>
+                                    {MyClasses.map(t => (
+                                    <option key={t.id} value={t.class}>
+                                        {t.class}
+                                    </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </li>
                     </ul>
+       
+                    {selectedMyClass && (
+                    <>   
+                        {showAddStudentForm ? (
+                            <ul className="editClass">
+                            <h3>Add student</h3>
+                                <li>
+                                    {selectedMyClass && (
+                                    <div className="item editClass">
+                                        <input className="editStudentInput" placeholder="Write a name" type="text" value={newStudentName} onChange={(e) => setNewStudentName(e.target.value)} />
+                                        <button className="editStudentBtn" onClick={handleAddStudent}>Add student</button>
+                                    </div>
+                                    )}
+                                </li>
+                            </ul>
+                        ) : (
+                        <button className="addStudentBtn" onClick={() => setShowAddStudentForm(true)}>Add Student <FontAwesomeIcon icon="fa-solid fa-user-plus" /></button>
+                        )}
+ 
+                        <h3>Students ({selectedClassStudents.length})</h3>
+                        <div className="studentList">
+                            <ul className="editClass">
+                            {selectedClassStudents.map((student, index) => (
+                                <li key={index}>
+                                {editedIndex === index ? (
+                                    <div className="item editClass">
+                                        <input className="editStudentInput" type="text" ref={inputRef} value={editedName} onChange={(e) => setEditedName(e.target.value)} />
+                                        <button className="editStudentBtn orangeBg" onClick={handleSave}>Save</button>
+                                    </div>
+                                ) : (
+                                    <div className="item editClass">                                    
+                                        <div className="studentName"><FontAwesomeIcon icon="fa-solid fa-child" /><span>{student}</span></div>
+                                        <div className="button-container">
+                                            <button className="editStudentBtn" onClick={() => handleEdit(index)}>Edit</button>
+                                            <button className="deleteStudentBtn" onClick={() => handleDelete(index)}>Delete</button>   
+                                        </div>
+                                    </div>
+                                )}
+                                </li>
+                            ))}
+                            </ul>
+                        </div>
+                    </>
+                    )}
                 </div>
             </div>
         </div>

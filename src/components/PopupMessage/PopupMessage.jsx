@@ -1,5 +1,6 @@
 import React from 'react';
 import './PopupMessage.css';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
@@ -23,7 +24,7 @@ const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
                     <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" className="warning-confirm"/>
                     <p>{message}</p>
                     <button onClick={onConfirm}>Delete teacher <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
-                    <button onClick={onClose}>Go back <FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>        
+                    <button onClick={onClose}>Go back</button>        
                 </div>
             );
         break;
@@ -34,17 +35,30 @@ const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
                     <span className="icon-text">Please confirm</span>
                     <p>{message}</p>
                     <button onClick={onConfirm}>Delete <FontAwesomeIcon icon="fa-solid fa-user-xmark" /></button>  
-                    <button onClick={onClose}>Go back <FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>        
+                    <button onClick={onClose}>Go back</button>        
+                </div>
+            );
+        break;
+        case 'confirm-create':
+            icon = (
+                <div className="icon-container">
+                    <FontAwesomeIcon icon="fa-solid fa-circle-confirm" className="confirm"/>
+                    <span className="icon-text">Confirm <FontAwesomeIcon icon="fa-solid fa-person-circle-question" /></span>
+                    <p>{message}</p>
+                    <button onClick={onConfirm}>Create class <FontAwesomeIcon icon="fa-solid fa-check" /></button>  
+                    <button onClick={onClose}>Go Back</button>        
                 </div>
             );
         break;
         case 'success':
             icon = (
                 <div className="icon-container">
+                    <span className="icon-text">Hurray! </span>
                     <FontAwesomeIcon icon="fa-regular fa-circle-check" className="success"/>
-                    <span className="icon-text">Success</span>
                     <p>{message}</p>
-                    <button onClick={onClose}>Close</button>    
+                    <Link to="/createnewmap">
+                        <button>Back to Create New Map</button>    
+                    </Link>
                 </div>
             );
         break;
