@@ -39,7 +39,7 @@ const AdminManageTeachers = () => {
         setType('warning-confirm');
         setMessage(
             <>
-                Are you really sure you want to delete the teacher?<br /><br />
+                Are you really sure you want to delete {teachers.find((teacher) => teacher.id === id).name}'s account?<br /><br />
                 <b>This action cannot be undone and the teacher will lose all their maps and classes.</b>
             </>);
         setShowPopup(true);
@@ -61,13 +61,12 @@ const AdminManageTeachers = () => {
             onClose={handleClosePopup}
             />
         )}
-        <Navbar title="Admin - Manage Teachers"/>
+        <Navbar title="Manage Teachers"/>
         <div className="flexbox smallPaddingTop">
-            <div className="item side left">
-                <div>
-                    <b><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> Deleting a teacher results in all their classes and maps getting removed.</b>
-                    <p>You should only delete a teacher if they have left the school, or if they should not have access.</p>
-                </div>
+            <div className="item side left warning">
+                <h4><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> Deleting a teacher results in all their classes and maps getting removed.</h4>
+                <br />
+                <p>You should only delete a teacher if they have left the school, or if they should not have access.</p>
             </div>
             <div className="item smallMarginTop teachersList">
                 <ul>

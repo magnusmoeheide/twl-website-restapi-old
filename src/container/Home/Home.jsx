@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Downshift from 'downshift';
 import Logo from '../../assets/smg-logo-transparent.png';
 import { Navbar } from '../../components';
@@ -42,10 +42,29 @@ const Home = props => {
         );
       };
 
+    const [greeting, setGreeting] = useState('');
+    const [user, setUser] = useState('User');
+
+    useEffect(() => {
+    // Retrieve the current time
+    const now = new Date();
+    const hours = now.getHours();
+
+    // Set the greeting based on the current time
+    if (hours >= 6 && hours < 12) {
+        setGreeting('Good morning');
+    } else if (hours >= 12 && hours < 18) {
+        setGreeting('Good afternoon');
+    } else {
+        setGreeting('Good evening');
+    }
+    }, []);
+
 
     return (
       <div className="container">
-        <Navbar title="Home"/>
+        <Navbar title={`${greeting}, ${user}`} />
+
         <div className="flexbox fullHeight">
             <div className="item side left">
             </div>
@@ -123,7 +142,7 @@ const Home = props => {
             </div>
             <div className="item side right">
                 <p>School: Skullerud skole</p>
-                <p>User: magnus.heide@code.berlin</p>
+                <p>User: name@osloskolen.no</p>
                 <p>Account: Teacher</p> 
             </div>
         </div>

@@ -93,27 +93,37 @@ const RegisterNewClass = () => {
             setType('warning');
             setMessage(
                 <>
-                    Please choose a grade.<br /><br />
-                    If you cannot find your grade, please contact your school admin.
+                    Your class needs a grade.
                 </>);
             setShowPopup(true);
             return;
         }
         if (!nameClass) {
             setType('warning');
-            setMessage("You have not entered a class name. It should be for example 8A, 8B, 8C etc." );
+            setMessage(
+                <>
+                    Your class needs a name, for example 8A or 8B.
+                </>);
             setShowPopup(true);
             return;
         }
         if (studentList.length === 0) {
             setType('warning');
-            setMessage("You have not entered any students. Write the name and click Enter to save the student." );
+            setMessage(
+                <>
+                    Your class needs students. Write a name and click Enter.
+                </>);
             setShowPopup(true);
             return;
         }
         if (studentList.length < 10) {
             setType('confirm-create');
-            setMessage("You have added quite few students. Are you sure you want to save the class?" );
+            setMessage(
+                <>
+                    You have added quite few students.<br />
+                    Are you sure you want to save the class?
+                </>
+                );
             setShowPopup(true);
             return;
         }
@@ -160,15 +170,15 @@ const RegisterNewClass = () => {
             <div className="item side left tips">
                 <br />
                 <p><FontAwesomeIcon icon="fa-regular fa-lightbulb" /> If you cannot find your grade, please contact your school Admin.</p>
-
+                <br />
                 <h4><FontAwesomeIcon icon="fa-solid fa-circle-info" /> Only write the first name</h4>
                 <p>You should only write the student's first name. If there are several with the same name, you can add a letter after their name.</p>
-                
+                <br />
                 <h4><FontAwesomeIcon icon="fa-solid fa-circle-info" /> Follow the same structure</h4>
                 <p>The class name structure should be somewhat the same for all teachers. 
                     We recommend following the structure '8A', '8B', '9A', '9B' etc.
                 </p>
-
+                <br />
                 <h4><FontAwesomeIcon icon="fa-solid fa-circle-info" /> Don't worry about mistakes</h4>
                 <p>If you register a wrong student name or forget someone, you can always edit the class from the home page. There is no need to start over.</p>
             </div>
@@ -215,7 +225,7 @@ const RegisterNewClass = () => {
             </div>
 
             <div className="item side aThird fullHeight">
-                <div className={inputStudent ? '' : 'hidden'}>
+                <div className={studentList.length > 0 ? '' : 'hidden'}>
                     <p>Students: <b>{studentList.length}</b></p>
                 </div>
                 

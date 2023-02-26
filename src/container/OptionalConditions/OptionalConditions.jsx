@@ -324,7 +324,7 @@ const OptionalConditions = () => {
                 <div className="item aThird">
                     <div> {/* WHO SHOULD SIT TOGETHER */}
                         <div>
-                            <h4>Who should sit together?<FontAwesomeIcon icon="fa-solid fa-children" /></h4>
+                            <h4>Who should sit together? <FontAwesomeIcon icon="fa-solid fa-children" /></h4>
                             <div className="selectAndBtn">
                                 <select className="sitTogetherSelect" onChange={handleStudentNameChange} ref={selectRef}>
                                     <option disabled selected>Please select students</option>

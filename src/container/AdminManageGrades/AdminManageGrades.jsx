@@ -69,12 +69,12 @@ useEffect(() => {
 
   return (
     <div className="container">
-      <Navbar title="Admin - Manage Grades"/>
+      <Navbar title="Manage Grades"/>
       <div className="flexbox">
         <div className="item aThirdTwoCols fullHeight">
           <div className="flexbox manageGradesBox">
-            <div className="item">
-              <span className="info"><FontAwesomeIcon icon="fa-solid fa-circle-info" /></span>
+            <div className="item tips">
+              <h4><FontAwesomeIcon icon="fa-solid fa-circle-info" /> Don't be late!</h4>
               <p>
                 As school admin you should create all grades at the beginning of the school year.
               </p>
@@ -91,8 +91,8 @@ useEffect(() => {
           </div>
 
           <div className="flexbox manageGradesBox">
-            <div className="item">
-              <span className="warning"><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /></span>
+            <div className="item warning">
+              <h4><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> No deletion of individual grades</h4>
               <p>
                 Once you add a grade, you cannot delete that grade until the end of the school year. 
               </p>
@@ -108,13 +108,13 @@ useEffect(() => {
           {isEditMode && (
             <>
           <div className="flexbox manageGradesBox">
-            <div className="item halfWidth">
-              <span className="warning"><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /></span>
-              <p>Only delete all grades at the end of the school year when the students change grades.</p>
+            <div className="item warning">
+              <h4><FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" /> Deletion is final</h4>
+              <p>Only delete all grades, classes and maps at the end of the school year.</p>
             </div>
             <div className="item halfWidth">
-              <h3>Delete grades</h3>
-              <button onClick={handleDeleteGrades}>Delete All Grades</button>
+              <h3>Delete grades, classes and maps</h3>
+              <button onClick={handleDeleteGrades}>Start a new school year</button>
             </div>
           </div>
           </>
