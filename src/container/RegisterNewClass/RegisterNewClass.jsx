@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Navbar } from '../../components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PopupMessage } from '../../components';
 import { createClass, getGrades } from '../../database';
+import * as XLSX from 'xlsx';
 
 const RegisterNewClass = () => {
 
@@ -30,6 +31,7 @@ const RegisterNewClass = () => {
     useEffect(() => {
         getGrades(setSchoolGrades);
     }, []);
+    const fileInput = useRef(null);
 
 
   // -----------------------------------------------
@@ -153,6 +155,44 @@ const RegisterNewClass = () => {
         setShowPopup(false);
     }
 
+    function handleFileUpload(event) {
+        fileInput.current.click();
+        setShowPopup(false);  
+    
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const names = rows.map(row => {
+                const name = row[0];
+                if (name) {
+                    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+                }
+                return name;
+            });
+            setStudentList([...studentList, ...names.filter(name => name)]);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+    
+    
+
+    function showUploadButton () {
+        setType('info-print');
+        setMessage(
+            <>
+            <FontAwesomeIcon icon="fa-solid fa-check" /> Do not have anything other than the first names in the sheet<br />
+            <FontAwesomeIcon icon="fa-solid fa-check" /> No headers, titles etc.
+            </>
+        );
+        setShowPopup(true);  
+    }
+
+      
 
   return (
     <div className="container">
@@ -162,6 +202,7 @@ const RegisterNewClass = () => {
             type={type}
             onClose={handleClosePopup}
             onConfirm={handleConfirmCreate}
+            onActivate={handleFileUpload}
             />
         )}
         <Navbar title="Register New Class"/>
@@ -189,7 +230,7 @@ const RegisterNewClass = () => {
                         <h3>What grade is the class in?</h3>
                     </div>
                     <div>
-                        <select value={selectedSchoolGrade} className="inputMinWidth16em" onChange={handleGradeChange}>
+                        <select value={selectedSchoolGrade} className="chooseGradeInput" onChange={handleGradeChange}>
                             <option value="" disabled>Choose Grade</option>
                             {grades.map((grade) => (
                             <option key={grade.id} value={grade.id}>
@@ -205,17 +246,37 @@ const RegisterNewClass = () => {
                         <h3>Class name</h3>
                     </div>
                     <div>
-                        <input type="text" id="classnameinput" className="inputMinWidth16em" placeholder="For Example 8A" onChange={handleClassChange}/>
+                        <input type="text" id="classnameinput" className="inputMinWidth14em" placeholder="For Example 8A" onChange={handleClassChange}/>
                     </div>
                 </div>  
 
                 <div>
                     <div>
-                        <h3>Enter student names</h3>
+                        <h3>Add students</h3>
                     </div>
+
                     <div>
-                        <input type="text" id="studentnameinput" className="inputMinWidth16em" placeholder="Write a name and click Enter" onKeyDown={handleKeyDown} onChange={handleStudentChange} />
+                        <button className="custom-file-upload" onClick={showUploadButton}>
+                            Upload an Excel sheet <FontAwesomeIcon icon="fa-solid fa-upload" />
+                        </button>
+                        <input
+                            id="file-upload"
+                            type="file"
+                            ref={fileInput}
+                            onChange={handleFileUpload}
+                            style={{ display: "none" }}
+                        />  
+                        
                     </div>
+                   
+                    <div className="orText">
+                        <p>or</p>
+                    </div>
+
+                    <div>
+                        <input type="text" id="studentnameinput" className="inputMinWidth14em" placeholder="Write a name and click Enter" onKeyDown={handleKeyDown} onChange={handleStudentChange} />
+                    </div>
+
                 </div>    
                 <br />
                 <div className="left">
@@ -228,6 +289,7 @@ const RegisterNewClass = () => {
                 <div className={studentList.length > 0 ? '' : 'hidden'}>
                     <p>Students: <b>{studentList.length}</b></p>
                 </div>
+
                 
                 <div style={{maxHeight: "75vh", overflowY: "scroll"}}>
                     {studentList.map(element => (

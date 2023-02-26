@@ -55,6 +55,10 @@
   
   .popup-message-warning-confirm {
     color: red;
+  }  
+  
+  .popup-message-warning-deleteall-confirm {
+    color: red;
   }
 
   .popup-message-confirm, .popup-message-confirm-create {
@@ -63,6 +67,20 @@
   
   .popup-message-success {
     color: green;
+  }  
+  
+  .popup-message-info {
+    color: rgb(84, 174, 239);
   }
+
+  .popup-message-info-print {
+    color: rgb(84, 174, 239);
+  }
+
+  .popup-message-info-print p {
+    text-align: left;
+    line-height: 1.5em;
+  }
+  
 
   

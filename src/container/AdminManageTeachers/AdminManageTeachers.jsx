@@ -53,7 +53,7 @@ const AdminManageTeachers = () => {
 
   return (
     <div className="container">
-        {showPopup && type === 'warning-confirm' && (
+        {showPopup && (
             <PopupMessage
             message={message}
             type={type}
@@ -82,7 +82,7 @@ const AdminManageTeachers = () => {
                 </ul>
             </div>
             <div className="item side right">
-                <p>Registered teachers: 40</p>
+                <p>Teachers: {teachers.length}</p>
             </div>
         </div>
         

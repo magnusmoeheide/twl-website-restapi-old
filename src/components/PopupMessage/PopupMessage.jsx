@@ -3,10 +3,30 @@ import './PopupMessage.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
+const PopupMessage = ({ message, type,  onConfirm, onClose, onActivate}) => {
 
     let icon = null;
     switch (type) {
+        case 'info':
+            icon = (
+                <div className="icon-container">
+                    <FontAwesomeIcon icon="fa-solid fa-circle-info" className="info"/>
+                    <span> Do not use for a new school year</span>
+                    <p>{message}</p>
+                    <button onClick={onClose}>Got it!</button>    
+                </div>
+            );
+        break;
+        case 'info-print':
+            icon = (
+                <div className="icon-container">
+                    <FontAwesomeIcon icon="fa-solid fa-circle-info" className="info"/>
+                    <span> Instructions to upload an Excel sheet</span>
+                    <p>{message}</p>
+                    <button onClick={onActivate}>Got it!</button>   
+                </div>
+            );
+        break;
         case 'warning':
             icon = (
                 <div className="icon-container">
@@ -17,6 +37,17 @@ const PopupMessage = ({ message, type,  onConfirm, onClose }) => {
                 </div>
             );
         break;
+        case 'warning-deleteall-confirm':
+            icon = (
+                <div className="icon-container">
+                    <span>Are you sure? </span>
+                    <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" className="warning-deleteall-confirm"/>
+                    <p>{message}</p>
+                    <button onClick={onConfirm}>Start new year <FontAwesomeIcon icon="fa-solid fa-forward" /></button>  
+                    <button onClick={onClose}>Go back</button>        
+                </div>
+            );
+        break;        
         case 'warning-confirm':
             icon = (
                 <div className="icon-container">

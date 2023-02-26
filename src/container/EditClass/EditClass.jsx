@@ -136,8 +136,9 @@ const EditClass = () => {
                         <>
                             <h4><FontAwesomeIcon icon="fa-solid fa-circle-info" /> Deleting a student</h4>
                             <p>
-                                Deleting a student will influence your current class map.
-                                It is advisable to generate a new map after deleting a student instead of printing a map with the deleted student.  
+                                Deleting a student will influence your current class map.<br />
+                                It is advisable to generate a new map after deleting a student.<br />
+                                Printing an already generated map with the deleted student can give issues.
                             </p>
                         </>
                     )}

@@ -169,6 +169,7 @@ select, input {
     border: 0.15em solid rgba(255, 120, 1, 0.31);
     border-radius: 0.4em;
     color: black;
+    min-width: 11em;
 }
 
 select.orangeBg {
@@ -246,6 +247,23 @@ label:hover {
   width: 50%;
 }
 
+.regCodeFlex {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item.regCodeText {
+  width: 21em;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.item.regCodeBtn button {
+  margin-left: 0;
+  margin-right: 0.5em;
+}
+
 .centerElements {
   display: flex; 
   justify-content: center;
@@ -279,6 +297,11 @@ label:hover {
 
 .item {
   order: 1;
+}
+
+.item.adminMain {
+  width: 44vw;
+  margin-left: 5vw;
 }
 
 .groupList {
@@ -380,6 +403,13 @@ label:hover {
   margin-top: 0;
 }
 
+.lisenceCode {
+  margin-left: 0.2em;
+  width: 21em;
+  text-align: left;
+  border: 1px solid black;
+}
+
 .classesList.admin {
   max-height: 20em;
 }
@@ -391,6 +421,17 @@ label:hover {
 .inputSearchSchool, .inputMinWidth16em {
   min-width: 16em;
 }
+
+.inputMinWidth14em {
+  min-width: 14em;
+}
+
+.chooseGradeInput {
+  min-width: 15.6em;
+  padding: 0.6em;
+}
+
+
 
 .inputSearchSchool::placeholder {
   opacity: 1;
@@ -530,7 +571,7 @@ td {
 }
 
 .manageGradesBox > .item > button {
-  max-width: 50%;
+  max-width: 70%;
 }
 
 .manageGradesBox > .item > span.warning {
@@ -576,6 +617,11 @@ td {
   border: 0.1em solid red;
 }
 
+
+.orText p {
+  margin: 0.5em 0em;
+  margin-left: 0.8em;
+}
 
 .registeredGrades {
   margin: 0;
@@ -792,6 +838,11 @@ input:checked + .slider:before {
   transform: translateX(0.813em);
 }
 
+input:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 /* Rounded sliders */
 .slider.round {
   border-radius: 1.063em;
@@ -807,26 +858,54 @@ input:checked + .slider:before {
 
 /* ---- ADMIN ----- */
 
-.copyBtn {
+.copyBtn, .reGenClickBtn {
   background-color: white;
   border: 0.15em solid rgba(255, 120, 1, 0.31);
 	color: rgb(255, 120, 1);
   padding: 0.25em;
   margin-left: 0.5em;
+  margin-right: 0;
   font-size: 1em;
   cursor: pointer;
+
+  transition: background-color 0.5s ease-out;
 }
 
-.copyBtn.copied {
+
+.copyBtn.copied, .reGenClickBtn.copied {
   background-color: rgb(255, 120, 1);
   color: white;
+  transition: background-color 0.5s ease-out;
 }
 
-.copyBtn.copied::after {
+
+
+.copyBtn.copied::after, .reGenClickBtn.copied::after {
   display: inline-block;
   margin-left: 0.2em;
   font-weight: bold;
 }
 
 
+
 /* ---- admin end ----- */
+
+
+/* ---- FILE UPLOAD --- */
+
+
+.custom-file-upload {
+  display: inline-block;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.65em;
+  margin: 0.3em;
+  border-color: rgb(198, 198, 198);
+  background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+  border-radius: 0.4em;
+  color: rgb(0, 0, 0, 0.6);
+  min-width: 15.6em;
+}
+

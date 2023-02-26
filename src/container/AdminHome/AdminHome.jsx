@@ -26,6 +26,19 @@ const AdminHome = () => {
     const [selectedSchoolClass, setSelectedSchoolClass] = useState('');
     const [searchValueMyClass, setSearchValueMyClass] = useState('');
 
+
+    const [lisenceCode, setLisenceCode] = useState(generateCode());
+    const handleRegenerateClick = () => {
+
+        setIsClicked(true);
+        setTimeout(() => {
+        setIsClicked(false);
+        }, 500);
+
+        setIsCopied(false);
+        setLisenceCode(generateCode());
+    };
+
     const getClassOptions = (inputValue) => {
         return SchoolClasses.filter((c) =>
           c.class.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -34,14 +47,16 @@ const AdminHome = () => {
       };
 
     const [isCopied, setIsCopied] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+
     const handleCopyClick = () => {
-        const lisenceCode = document.querySelector('.lisenceCode');
-        navigator.clipboard.writeText(lisenceCode.textContent);
+        navigator.clipboard.writeText(lisenceCode);
         setIsCopied(true);
         setTimeout(() => {
         setIsCopied(false);
         }, 3000);
-    };
+    };    
+
 
     const [greeting, setGreeting] = useState('');
     const [user, setUser] = useState('Admin');
@@ -60,6 +75,16 @@ const AdminHome = () => {
         setGreeting('Good evening');
     }
     }, []);
+
+    function generateCode() {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        for (let i = 0; i < 6; i++) {
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+      
 
 
   return (
@@ -96,70 +121,92 @@ const AdminHome = () => {
                 </div>
                 
             </div>
-            <div className="item smallPaddingTop">
+            <div className="item adminMain smallPaddingTop">
                 <div>
                     <div className="xsPaddingLeft">
-                        <p>
-                            Registration code for new teachers: 
-                            <b className="lisenceCode"> F4FG2E</b>
-                            <button className={isCopied ? 'copyBtn copied' : 'copyBtn'} onClick={handleCopyClick}>
-                                {isCopied ? (
-                                <>
-                                    Copied <FontAwesomeIcon icon={faCheck} />
-                                </>
-                                ) : (
-                                'Copy code'
-                                )}
-                            </button>
-                        </p>
-                    </div>
-                    <h3>Settings</h3>
-                    <Link to="/adminmanageteachers">
-                        <button className="orangeBg">Manage Teacher Accounts <FontAwesomeIcon icon="fa-solid fa-chalkboard-user" /></button>
-                    </Link>
-                    <Link to="/adminmanagegrades">
-                        <button className="orangeBg">Manage Grades <FontAwesomeIcon icon="fa-solid fa-graduation-cap" /></button>
-                    </Link>
-                    
-                </div>
-
-                <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
-                    itemToString={item => (item ? item.class : '')}
-                >
-                {({getInputProps, getItemProps, isOpen, getMenuProps, inputValue,
-                    highlightedIndex,selectedItem}) => (
-
-                    <div>   
-                        <h3>
-                            My school's classes
-                        </h3>
-                        
-                        <input className="inputSearchSchool"
-                            {...getInputProps({placeholder: 'Search for Class or Teacher', 
-                            onChange: e => setSearchValueMyClass(e.target.value)
-                            })}
-                        />
-
-                        <button className="orangeBg" disabled={!selectedSchoolClass}>
-                            View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" />
-                        </button>
-                        
-                        <div className="classesList admin">
-                            <ul {...getMenuProps()}>
-                                <br />
-                                {isOpen
-                                ? getClassOptions(searchValueMyClass).map((item, index) => (
-                                    <li {...getItemProps({key: item.id, index, item,})}>
-                                    {item.class} ({item.teacher})
-                                    </li>
-                                ))
-                                : null}
-                            </ul>
+                        <div className="flexbox regCodeFlex">
+                   
+                                <div className="item regCodeText">
+                                    Registration code for new teachers: <b>{lisenceCode}</b>
+                                </div>
+                                <div className="item regCodeBtn">
+                                    <button className={isClicked? 'reGenClickBtn copied' : 'reGenClickBtn'} onClick={handleRegenerateClick}>
+                                        {isClicked ? (
+                                        <>
+                                             New code <FontAwesomeIcon icon="fa-solid fa-rotate" />
+                                        </>
+                                        ) : (
+                                        <>
+                                             New code <FontAwesomeIcon icon="fa-solid fa-rotate" />
+                                        </>
+                            
+                                        )}
+                                    </button>   
+                                    <button className={isCopied ? 'copyBtn copied' : 'copyBtn'} onClick={handleCopyClick}>
+                                        {isCopied ? (
+                                        <>
+                                            Copied <FontAwesomeIcon icon={faCheck} />
+                                        </>
+                                        ) : (
+                                        <>
+                                            Copy code <FontAwesomeIcon icon="fa-regular fa-copy" />
+                                        </>
+                            
+                                        )}
+                                    </button>   
+                                </div>
+                            
                         </div>
                     </div>
-                    )}
-                </Downshift>
-        
+                
+                </div>
+
+                <div className="item">
+                    <h3>Settings</h3>
+                        <Link to="/adminmanageteachers">
+                            <button className="orangeBg">Manage Teacher Accounts <FontAwesomeIcon icon="fa-solid fa-chalkboard-user" /></button>
+                        </Link>
+                        <Link to="/adminmanagegrades">
+                            <button className="orangeBg">Manage Grades <FontAwesomeIcon icon="fa-solid fa-graduation-cap" /></button>
+                        </Link>
+
+                    <Downshift class="downshift" onChange={selectedItem => setSelectedSchoolClass(selectedItem.class)}
+                        itemToString={item => (item ? item.class : '')}
+                    >
+                    {({getInputProps, getItemProps, isOpen, getMenuProps, inputValue,
+                        highlightedIndex,selectedItem}) => (
+
+                        <div>   
+                            <h3>
+                                My school's classes
+                            </h3>
+                            
+                            <input className="inputSearchSchool"
+                                {...getInputProps({placeholder: 'Search for Class or Teacher', 
+                                onChange: e => setSearchValueMyClass(e.target.value)
+                                })}
+                            />
+
+                            <button className="orangeBg" disabled={!selectedSchoolClass}>
+                                View Maps in Class <FontAwesomeIcon icon="fa-solid fa-users-rectangle" />
+                            </button>
+                            
+                            <div className="classesList admin">
+                                <ul {...getMenuProps()}>
+                                    <br />
+                                    {isOpen
+                                    ? getClassOptions(searchValueMyClass).map((item, index) => (
+                                        <li {...getItemProps({key: item.id, index, item,})}>
+                                        {item.class} ({item.teacher})
+                                        </li>
+                                    ))
+                                    : null}
+                                </ul>
+                            </div>
+                        </div>
+                        )}
+                    </Downshift>
+                </div>
             </div>
             <div className="item paddingTop side right">
                 <p>School: Skullerud skole</p>
