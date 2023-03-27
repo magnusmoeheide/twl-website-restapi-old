@@ -1,0 +1,911 @@
+
+body {
+  overflow: hidden;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  background-color: rgb(241, 241, 241);
+  font-size: 2.2vh;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 97vh !important;
+}
+
+
+.flexbox {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  text-align: left;
+  padding: 0;
+}
+
+.noGrow {
+  flex-grow: 0;
+}
+
+button {	
+  font-size: 1em;
+	padding: 0.65em;
+  margin: 0.3em;
+	background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+	color: rgb(255, 120, 1);
+	border-radius: 0.4em;
+}
+
+button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+button.orangeBg:disabled {
+  background-color: rgba(255, 120, 1, 0.548);
+  color: white;
+  cursor: default;
+}
+
+button.active {
+  color: white;
+  background-color: rgb(255, 120, 1);
+  font-weight: bold;
+}
+
+button.orangeBg {
+  background-color: rgb(255, 120, 1);
+  color: white;
+}
+
+.logo {
+  margin: auto;
+  text-align: center;
+  max-width: 20em;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  color: black;
+}
+
+h2 {
+  margin-top: 0.2em;
+}
+
+h3 {
+  color: rgb(255, 120, 1);
+  margin: 0.3em;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+.black {
+  color: black;
+}
+
+.red {
+  color: red;
+}
+
+
+.bold {
+  font-weight: bold;
+}
+
+input[disabled]:hover {
+  cursor:inherit;
+  box-shadow: none;
+  user-select: none;
+}
+
+::placeholder {
+  opacity: 0.6; /* Firefox */
+}
+
+select:focus, input:focus {
+	outline: none;
+}
+
+select:hover, input:hover, button:hover:enabled {
+  cursor: pointer;
+  box-shadow: 0 0 0.8em rgba(33,33,33,.2);
+  transition: 0.2s;
+}
+
+.select {
+  padding: 0.4em;
+}
+
+.suggestion {
+  background-color: white;
+  border: 0.18em solid rgba(255, 120, 1, 0.31);
+  border-radius: 0.2em;
+  padding: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.suggestion:hover {
+  border: 0.18em solid rgb(255, 120, 1);
+  transition: 0.2s;
+}
+
+.selected {
+  border: 0.18em solid rgb(255, 120, 1);
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+select, input {
+    font-size: 1em;
+    padding: 0.65em;
+    margin: 0.3em;
+    border-color: rgb(198, 198, 198);
+    border: 0.15em solid rgba(255, 120, 1, 0.31);
+    border-radius: 0.4em;
+    color: black;
+    min-width: 11em;
+}
+
+select.orangeBg {
+  background-color: rgb(255, 120, 1);
+  color: white;
+}
+
+select.whiteBg {
+  background-color: white;
+  color: rgb(255, 120, 1);
+}
+
+input::placeholder {
+  color: black;
+}
+
+label input {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  vertical-align: middle;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+
+#checkbox {
+  accent-color: rgb(255, 120, 1);
+  color: white;
+}
+
+.lastMap.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.sortFromLeft {
+  text-align: left;
+}
+
+.sortFromRight {
+  justify-content: right;
+}
+
+.flexbox.sortFromLeft {
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.aThird select {
+  margin-left: 0;
+  width: 100%;
+}
+
+.oneGroup {
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+  border-bottom: 0.1em solid rgba(128, 128, 128, 0.147);
+  width: 100%;
+  position: relative;
+}
+
+
+
+
+.fullWidth {
+  width: 100%;
+}
+
+.halfWidth {
+  width: 50%;
+}
+
+.regCodeFlex {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item.regCodeText {
+  width: 21em;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.item.regCodeBtn button {
+  margin-left: 0;
+  margin-right: 0.5em;
+}
+
+.centerElements {
+  display: flex; 
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1em;
+}
+
+.centerElements p {
+  margin: 0; /* Remove default margin for paragraphs */
+}
+
+
+.aThird {
+  width: 28vw;
+  height: 45vh;
+}
+
+.aThirdTwoCols {
+  width: 66vw;
+  height: 45vh;
+}
+
+.fullHeight {
+  height: calc(100vh - 3em); 
+}
+
+.autoHeight {
+  height: 28vw;
+  max-height: 36vh;
+}
+
+.item {
+  order: 1;
+}
+
+.item.adminMain {
+  width: 44vw;
+  margin-left: 5vw;
+}
+
+.groupList {
+  max-height: 9em;
+  overflow-y: scroll;
+}
+
+/* EDIT CLASS */
+
+.item.editClass {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editStudentBtn, .deleteStudentBtn, .editStudentInput {
+  margin: 0;
+  padding: 0.3em;
+  margin-bottom: 0.2em;
+  margin-left: 0.2em;
+}
+
+.editStudentInput {
+  margin-left: 0;
+}
+
+.editClass {
+  padding-left: 0.2em;
+  background-color: transparent;
+}
+
+.editClass h3 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.editClass li {
+  margin-bottom: 0.2em;
+  padding: 0.2em;
+  background-color: transparent;
+  margin-bottom: 0.3em;
+  border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+}
+
+.editClass.noBorderBottom li {
+  border-bottom: none;
+  padding-left: 0;
+}
+
+.noMarginLeft {
+  margin-left: 0;
+}
+
+
+/* -- edit class end -- */
+
+.side {
+  padding-top: 1em;
+  max-width: 20%;
+  flex-grow: 1;
+  margin-right: 1em;
+  margin-left: 1em;
+} 
+
+.selectAndBtn {
+  width: 100%;
+  display: flex;
+}
+
+.selectAndBtn select {
+  flex: 1;
+  margin-right: 0.1em;
+}
+
+.selectAndBtn button {
+  flex: 0 0 auto;
+  margin-left: 0.1em;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.classesList {
+  max-height: 12em;
+  overflow-y: scroll;
+}
+
+.studentList {
+  max-height: 68vh;
+  overflow-y: scroll;
+}
+
+.studentList ul {
+  margin-top: 0;
+}
+
+.lisenceCode {
+  margin-left: 0.2em;
+  width: 21em;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.classesList.admin {
+  max-height: 20em;
+}
+
+.classesList ul {
+  margin-top: 0;
+}
+
+.inputSearchSchool, .inputMinWidth16em {
+  min-width: 16em;
+}
+
+.inputMinWidth14em {
+  min-width: 14em;
+}
+
+.chooseGradeInput {
+  min-width: 15.6em;
+  padding: 0.6em;
+}
+
+
+
+.inputSearchSchool::placeholder {
+  opacity: 1;
+}
+
+.inputMapName {
+  min-width: 12em;
+}
+
+.studentName span {
+  margin-left: 0.6em;
+}
+
+.goBack {
+  background-color: white;
+  color: rgb(255, 120, 1);
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+}
+
+ul {
+  display: table;
+  width: 90%;
+  padding-left: 1em;
+  list-style-type: none;
+}
+
+
+li {
+  border-bottom: 0.1em solid rgba(243, 126, 8, 0.485);
+  background-color: white;
+  padding: 0.5em;
+  margin-bottom: 1.2em;
+}
+
+td {
+  padding: 1em;
+}
+
+.conditionsTable, .statsTable {
+  padding-top: 0;
+  width: 100%;
+}
+
+.conditionsTable td {
+  padding-left: 0;
+  padding-top: 0.3em;
+  padding-bottom: 1.5em;
+}
+
+.statsTable td {
+  padding-left: 0.4em;
+  padding-top: 0.3em;
+  padding-bottom: 1em;
+}
+
+.teachersList {
+  width: 60%;
+  padding: 0;
+  margin: 0;
+  max-height: 39em;
+  overflow-y: scroll;
+}
+
+.teachersList ul {
+  margin-left: 0.6em;
+  margin-top: 0;
+  margin-right: 0;
+}
+
+.teachersList li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4em;
+  margin-bottom: 0.6em;
+  border-radius: 0.4em;
+  border-bottom: none;
+}
+
+.teacherInfo, .columnInfo {
+  display: flex;
+  align-items: center;
+}
+
+.teacherName {
+  font-weight: bold;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  min-width: 10em;
+  max-width: 10em;
+}
+
+.teacherClasses {
+  max-width: 30em;
+  margin-right: 1em;
+}
+
+.deleteTeacherBtn {
+  background-color: rgb(255, 120, 1);
+  color: #fff;
+  border: 0;
+  padding: 0.3em 0.6em;
+}
+
+
+.manageGradesBox {
+  margin: 2em auto; /* set horizontal margin to "auto" to center the div and vertical margin to 2em */
+  padding: 1em;
+  border-radius: 0.4em;
+  background-color: white;
+  display: flex;
+  flex-direction: row; /* align children in a row */
+  justify-content: space-between; /* evenly space children along the row */
+  align-items: center;
+}
+
+
+.manageGradesBox > .item {
+  width: 50%; /* each item takes up half the width of the parent */
+  display: flex;
+  flex-direction: column; /* align child elements vertically */
+  justify-content: center; /* center child elements vertically */
+  padding: 0 1em; /* add some padding to each item */
+}
+
+
+
+.manageGradesBox > .item:last-child h3 {
+  margin: 0;
+  margin-bottom: 0.6em;
+  padding-left: 0.3em;
+}
+
+.manageGradesBox > .item > p {
+  margin-top: 0.4em;
+}
+
+.manageGradesBox > .item > button {
+  max-width: 70%;
+}
+
+.manageGradesBox > .item > span.warning {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: red;
+}
+
+.manageGradesBox > .item > span.info {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: rgb(255, 120, 1);
+}
+
+
+.tips, .warning {
+  line-height: 1.3em;
+}
+
+.tips h4 {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: rgb(84, 174, 239);
+}
+
+.warning h4 {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: rgb(246, 51, 51); 
+}
+
+.tips p, .warning p {
+  margin-top: 0;
+}
+
+.error {
+  color: red;
+  margin-left: 0.4em;
+  margin-right: 2em;
+  background-color: rgb(250, 234, 234);
+  padding: 1em;
+  border-radius: 0.4em;
+  border: 0.1em solid red;
+}
+
+
+.orText p {
+  margin: 0.5em 0em;
+  margin-left: 0.8em;
+}
+
+.registeredGrades {
+  margin: 0;
+  padding-left: 0.5em;
+}
+
+.registeredGrades li {
+  padding: 0.2em;
+  margin: 0em;
+  background-color: inherit;
+}
+
+
+.lastMap {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.lastMap.show {
+  opacity: 1;
+  max-height: 5em; /* or any other value that fits your needs */
+}
+
+
+.student-name {
+  flex-grow: 1;
+}
+
+.studentGroup {
+  margin-left: -0.6em;
+  width: 100%;
+}
+
+.studentGroup p {
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+.studentGroup p span {
+  color: rgb(255, 120, 1);
+  margin-right: 0em;
+}
+
+.studentGroup li {
+  background-color: rgb(241, 241, 241);
+  display: inline-block;
+  border-bottom: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.studentCount {
+  margin-left: 1em;
+}
+
+.groupFirstBox, .groupSecondBox{
+  max-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ------ CONCRETE STYLING ------ */
+
+.heightTwoEm {
+  height: 2em;
+}
+
+.heightTwoEm p {
+  margin-left: 0.6em;
+  margin-top: 0.3em;
+  height: inherit;
+}
+
+.paddingOneEm {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.bottomRight{
+  position: relative;
+}
+
+.bottomRight button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.xsPaddingTop {
+  padding-top: 0.2em;
+}
+
+.smallMarginTop {
+  margin-top: 1em;
+}
+
+.smallMarginBottom {
+  margin-bottom: 1em;
+}
+
+.negMarginLeft {
+  margin-left: -0.3em;
+}
+
+.smallPaddingTop {
+  padding-top: 1em;
+}
+
+.paddingTop {
+  padding-top: 2em;
+}
+
+.xsPaddingLeft {
+  padding-left: 0.4em;
+}
+
+.minWidth30 {
+  min-width: 30vw;
+}
+
+/* ----- concrete styling end -------- */
+
+
+/* --------- ICONS ------------- */
+
+.icon {
+  font-size: 1.3em;
+  max-height: 1em;
+  width: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: inherit;
+}
+
+
+.deleteIcon {
+  margin-left: 0.4em;
+  margin-right: 0.5em;
+  color: red;
+}
+
+.removeIcon {
+  margin-left: 1em;
+  right: 0;
+  position: absolute;
+  font-weight: 600;
+  color: orange;
+}
+
+.confirmIcon {
+  margin-left: 1em;
+  font-weight: bold;
+  color: green;
+}
+
+/* ------- icons end ------------ */
+
+
+
+/* ----- SWITCH START ------ */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 1.875em;
+  height: 1.063em;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  transition: 0.4s;
+  border-radius: 1.063em;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 0.813em;
+  width: 0.813em;
+  left: 0.125em;
+  bottom: 0.125em;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.03125em green;
+}
+
+input:checked + .slider:before {
+  transform: translateX(0.813em);
+}
+
+input:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1.063em;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/* ---- switch end ---- */
+
+
+/* ---- ADMIN ----- */
+
+.copyBtn, .reGenClickBtn {
+  background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+	color: rgb(255, 120, 1);
+  padding: 0.25em;
+  margin-left: 0.5em;
+  margin-right: 0;
+  font-size: 1em;
+  cursor: pointer;
+
+  transition: background-color 0.5s ease-out;
+}
+
+
+.copyBtn.copied, .reGenClickBtn.copied {
+  background-color: rgb(255, 120, 1);
+  color: white;
+  transition: background-color 0.5s ease-out;
+}
+
+
+
+.copyBtn.copied::after, .reGenClickBtn.copied::after {
+  display: inline-block;
+  margin-left: 0.2em;
+  font-weight: bold;
+}
+
+
+
+/* ---- admin end ----- */
+
+
+/* ---- FILE UPLOAD --- */
+
+
+.custom-file-upload {
+  display: inline-block;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.65em;
+  margin: 0.3em;
+  border-color: rgb(198, 198, 198);
+  background-color: white;
+  border: 0.15em solid rgba(255, 120, 1, 0.31);
+  border-radius: 0.4em;
+  color: rgb(0, 0, 0, 0.6);
+  min-width: 15.6em;
+}
+
