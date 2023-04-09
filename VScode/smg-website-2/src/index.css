@@ -5,7 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.2rem;
+ 
+  overflow-x:hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+p:hover, li:hover, h1:hover, h2:hover, h3:hover {
+  cursor: default;
 }
 
 
@@ -154,7 +160,7 @@ body {
 
 .features-section {
   background-color: #f5f5f5;
-  padding: 2rem 0rem;
+  padding: 4rem 0rem;
 
   display: flex;
   flex-wrap: wrap;
@@ -181,7 +187,7 @@ body {
 }
 
 .feature {
-  width: 25%;
+  flex: 1;
   margin: 1.5%;
   padding: 1rem 1.5rem;
   text-align: center;
@@ -210,66 +216,104 @@ body {
 .feature-text {
   color: #4e4e4e;
   line-height: 1.8;
+  font-size: 1.1rem;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 850px) {
+  .features-container {
+    flex-flow: column wrap;
+  }
+
   .feature {
     width: 100%;
     margin: 1.5% 0;
+
+    flex-direction: column;
   }
+
 }
 
 /* --------------------- */
 
 /* --------- REASONS ------------ */
 
+.reasons-section {
+  background-color: transparent;
+  margin: 2rem;
+}
+
 .reasons {
-  background-color: #f2f2f2;
-  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+
+}
+
+.reasons-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .reasons-container {
-  max-width: 1400px;
-  padding: 0rem 4rem; 
-
-  margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .reason {
-  width: 50%;
-  flex-basis: calc(33% - 1rem);
-  margin-bottom: 2rem;
-
-  flex-direction: column;
-  border: 1px solid red;
+  width: calc(60% - 25px);
+  margin: 10px;
 }
 
-.reason-text {
-  margin-right: 1rem;
-}
-
-.reason-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.reason-description {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-}
-
-.reason-image {
-
-  flex-basis: calc(66.66% - 1rem);
+.reason-side {
+  width: calc(40% - 25px);
+  margin: 10px;
 }
 
 .reason-image img {
-  max-width: 100%;
-  border-radius: 3px;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  margin: auto;
+}
+
+.reason-text {
+  padding: 20px;
+  background-color: #f2f2f2;
+
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.reason-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.reason-title img {
+  width: 4rem;
+}
+
+.reason-title span {
+  margin-left: 1rem;
+}
+
+.reason-description {
+  margin: 0.8rem 0 0 0;
+  line-height: 1.5;
+  color: #666;
 }
 
 @media only screen and (max-width: 768px) {
@@ -279,6 +323,14 @@ body {
   }
 
   .reason {
+    flex-basis: 100%;
+  }
+
+  .reasons-section {
+    margin: 0rem;
+  }
+
+  .reason-side {
     flex-basis: 100%;
   }
 
@@ -335,7 +387,7 @@ body {
 .plan-title {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: black;
 }
 
 .plan-description {
@@ -343,36 +395,40 @@ body {
   color: #666;
 }
 
+.plan-description.mva {
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
 .plan-title-included {
   font-size: 1rem;
   margin-top: 2rem;
   margin-bottom: 0rem;
   font-weight: bold;
-  color: #333;
+  color: #484d5a;
 }
 
 .plan-cost {
   font-size: 2rem;
   margin-bottom: 0rem;
-  color: #333;
+  color: #484d5a;
 }
 
 .plan-cost-period {
   font-size: 1.1rem;
   margin-bottom: 0rem;
-  color: #333;
+  color: #484d5a;
 }
 
 .plan-details {
   list-style: none;
   padding: 0;
   margin-bottom: 2rem;
-  
 }
 
 .plan-details li {
   margin-bottom: 0.2rem;
-  color: #666;
+  color: #484d5a;
 
 }
 
@@ -471,6 +527,15 @@ body {
 
 /* --------------------------- */
 
+/* ----------- TRUSTPILOT ----------- */
+
+.trustpilot-widget {
+  background-color: #fff;
+}
+
+/* --------------------------- */
+
+
 /* ----------- Q&A ---------------- */
 
 .qa-section {
@@ -506,7 +571,7 @@ body {
   user-select: none;
 }
 
-.qa:hover {
+.qa:hover, .qa h3:hover, .qa p:hover {
   cursor: pointer;
 }
 
@@ -649,6 +714,10 @@ body {
 
 .footer-business:hover {
   cursor: pointer;
+}
+
+.footer-copy:hover {
+  cursor:default;
 }
 
 @media only screen and (min-width: 768px) {

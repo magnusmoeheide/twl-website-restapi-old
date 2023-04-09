@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { images } from "../../constants";
+import { Link } from "react-router-dom";
+import Header from "../Header/Header";
 
 const Home = () => {
   const [answersVisible, setAnswersVisible] = useState({});
@@ -13,56 +15,24 @@ const Home = () => {
 
   return (
     <div>
-      <header className="header">
-        <div className="header-container">
-          <div className="logo-container">
-            <a href="">
-              <img src={images.logoNo} alt="" />
-            </a>
-          </div>
-          <div className="links-container">
-            <a href="/" className="link">
-              Home
-            </a>
-            <a href="/" className="link">
-              About
-            </a>
-            <a href="/" className="link">
-              Pricing
-            </a>
-            <a href="/" className="link">
-              Testimonials
-            </a>
-            <a href="/" className="link">
-              Contact
-            </a>
-          </div>
-          <div className="button-container">
-            <a
-              className="login-button"
-              href="app.klassekartgenerator.no"
-              target="_blank"
-            >
-              Log in
-            </a>
-          </div>
-        </div>
-      </header>
+      <Header />
 
-      <section class="hero">
-        <div class="container">
-          <div class="hero-content">
-            <h1 class="hero-title">
+      <section className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <h1 className="hero-title">
               Seat Map Made <span className="orange">Easy</span>
             </h1>
-            <p class="hero-text">
+            <p className="hero-text">
               Say goodbye to the headache of creating classroom seating
               arrangements with our seat map generator. With just a few clicks,
               you have a fully generated map with all your conditions met.
             </p>
-            <button class="hero-button">Get Started</button>
+            <Link to="/getstarted">
+              <button className="hero-button">Get Started</button>
+            </Link>
           </div>
-          <div class="hero-image">
+          <div className="hero-image">
             <img src="https://via.placeholder.com/600x400" alt="Hero Image" />
           </div>
         </div>
@@ -95,7 +65,8 @@ const Home = () => {
               Our algorithm allows you to specify who should or should not sit
               together, who should sit in front or back of the classroom, who
               should sit in a specific place, and it allows you to assign
-              everyone a new partner and seat from previous maps.
+              everyone a new partner and seat from previous maps. You can also
+              choose between our many seat configurations or design your own.
             </p>
           </div>
           <div className="feature">
@@ -105,7 +76,7 @@ const Home = () => {
             <h3 className="feature-header">Data privacy</h3>
             <p className="feature-text">
               We only store students' first names. All data is stored on
-              European servers, which are subject to EU data protection
+              European servers, which are subject to strict EU data protection
               regulations. Our policies and procedures have been thoroughly
               vetted and assessed by leading industry experts, and we
               continually review and update them.
@@ -114,51 +85,61 @@ const Home = () => {
         </div>
       </section>
 
-      <section class="reasons">
-        <div class="reasons-container">
-          <div class="reason">
-            <div class="reason-text">
-              <h3 class="reason-title">Save Time</h3>
-              <p class="reason-description">
-                On average, to make a manual map takes around 30 minutes. To use
-                the generator takes less than 2 minutes. You simply select one
-                of your classes, choose your conditions, and there you have a
-                generated map, fully customizable and exportable.
-              </p>
+      <section className="reasons-section">
+        <h2 className="reasons-title">Why use our Generator?</h2>
+        <div className="reasons">
+          <div className="reasons-container">
+            <div className="reason">
+              <div className="reason-text">
+                <h3 className="reason-title">
+                  <img src={images.clock} />
+                  <span>Save Time</span>
+                </h3>
+                <p className="reason-description">
+                  On average, to make a manual map takes around 30 minutes. To
+                  use the generator takes less than 2 minutes. You simply select
+                  one of your classes, choose your conditions, and there you
+                  have a generated map, fully customizable and exportable.
+                </p>
+              </div>
+
+              <div className="reason-text">
+                <h3 className="reason-title">
+                  <img src={images.profits} />
+                  <span>Save Money</span>
+                </h3>
+                <p className="reason-description">
+                  A new map is on average made every 3-4 weeks. A teacher in
+                  Norway has an average salary of €30 per hour. To make seat
+                  maps manually costs your school on average €400 per teacher
+                  per year. Saved time is saved money!
+                </p>
+              </div>
+
+              <div className="reason-text">
+                <h3 className="reason-title">
+                  <img src={images.battery} />
+                  <span>Save Energy</span>
+                </h3>
+                <p className="reason-description">
+                  Being a teacher can be stressful enough. Save your patience to
+                  where it is needed, don't waste it on paperwork.
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="reason">
-            <div class="reason-text">
-              <h3 class="reason-title">Save Money</h3>
-              <p class="reason-description">
-                A new map is on average made every 3-4 weeks. A teacher in
-                Norway has an average salary of €30 per hour. To make seat maps
-                manually costs your school on average €400 per teacher per year.
-                Saved time is saved money!
-              </p>
+
+            <div className="reason-side">
+              <div className="reason-image">
+                <img src={images.teacher} alt="Reasons Image" />
+              </div>
             </div>
-          </div>
-          <div class="reason">
-            <div class="reason-text">
-              <h3 class="reason-title">Save Energy</h3>
-              <p class="reason-description">
-                Being a teacher can be stressful enough. Save your patience to
-                where it is needed, don't waste it on paperwork.
-              </p>
-            </div>
-          </div>
-          <div class="reason-image">
-            <img
-              src="https://via.placeholder.com/400x600"
-              alt="Reasons Image"
-            />
           </div>
         </div>
       </section>
 
       <section className="pricing-section">
         <div className="container">
-          <h2 class="pricing-title">
+          <h2 className="pricing-title">
             Our <span className="orange">Pricing</span> Plan
           </h2>
           <div className="pricing-plan">
@@ -272,13 +253,16 @@ const Home = () => {
               </li>
             </ul>
             <br />
-            <a
-              href="app.klassekartgenerator.no"
-              target="_blank"
-              className="start-now-button"
-            >
-              Start Now
-            </a>
+            <Link to="/getstarted">
+              <a
+                href="app.klassekartgenerator.no"
+                target="_blank"
+                className="start-now-button"
+              >
+                Start Now
+              </a>
+            </Link>
+            <p className="plan-description mva">Price is VAT excluded.</p>
           </div>
 
           <div className="pricing-plan">
@@ -404,6 +388,7 @@ const Home = () => {
         <h2 className="testimonials-title">
           What The <span className="orange">Schools</span> Say
         </h2>
+
         <div className="container">
           <div className="testimonial">
             <img
@@ -438,6 +423,27 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <div
+        className="trustpilot-widget center"
+        data-locale="en-GB"
+        data-template-id="5419b6a8b0d04a076446a9ad"
+        data-businessunit-id="6431713917cc990a6d1b67ae"
+        data-style-height="24px"
+        data-style-width="100%"
+        data-theme="light"
+        data-min-review-count="10"
+        data-without-reviews-preferred-string-id="3"
+        data-style-alignment="center"
+      >
+        <a
+          href="https://uk.trustpilot.com/review/klassekartgenerator.no"
+          target="_blank"
+          rel="noopener"
+        >
+          Trustpilot
+        </a>
+      </div>
 
       <section className="qa-section">
         <h2 className="qa-title">
@@ -500,16 +506,27 @@ const Home = () => {
           </div>
           <div className="qa" onClick={() => toggleAnswer("qa4")}>
             <h3 className="qa-question">
-              How does the test phase and payment work?
+              How does the 90 days free trial and payment work?
             </h3>
             <div
               className="qa-answer"
               style={{ display: answersVisible["qa4"] ? "block" : "none" }}
             >
               <p>
-                You can cancel your subscription at any time by logging into
-                your account and going to the subscription section. Click the
-                "Cancel Subscription" button and follow the prompts.
+                We are so confident in our generator that we give you a free 90
+                day trial! You can cancel within those 90 days and pay nothing
+                for the use of the generator.
+              </p>
+              <p>
+                One week before your trial expires, we will send you an email,
+                reminding you to cancel if you do not wish to continue with the
+                subscription.
+              </p>
+              <p>
+                If you do wish to continue, you will receive an invoice every
+                semester end by default. However, we can of course tailor the
+                subscription to your needs and they payments can be structured
+                to your preference.
               </p>
             </div>
             <button
@@ -521,23 +538,23 @@ const Home = () => {
         </div>
       </section>
 
-      <section class="article-section">
-        <h2 class="section-heading">
+      <section className="article-section">
+        <h2 className="section-heading">
           Latest <span className="orange">Articles</span>
         </h2>
-        <div class="container">
-          <div class="article-preview">
+        <div className="container">
+          <div className="article-preview">
             <a href="#">
               <img src="https://via.placeholder.com/300x200" alt="Article 1" />
-              <h3 class="article-title">
-                10 Best Travel Destinations in Europe
+              <h3 className="article-title">
+                Why you should change classroom seats frequently
               </h3>
             </a>
           </div>
-          <div class="article-preview">
+          <div className="article-preview">
             <a href="#">
               <img src="https://via.placeholder.com/300x200" alt="Article 2" />
-              <h3 class="article-title">
+              <h3 className="article-title">
                 The Benefits of Yoga for Stress Relief
               </h3>
             </a>
@@ -548,7 +565,7 @@ const Home = () => {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-copy">
-            © 2023 Klassekartgenerator |{" "}
+            © 2023 SeatMapGenerator.com |{" "}
             <a
               href="https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=824325952"
               className="footer-business"
@@ -558,15 +575,12 @@ const Home = () => {
             . All rights reserved.
           </div>
           <div className="footer-links-container">
-            <a href="/" className="footer-link">
-              Terms of Service
-            </a>
-            <a href="/" className="footer-link">
-              Privacy Policy
-            </a>
-            <a href="/" className="footer-link">
+            <a href="mailto:hei@klassekartgenerator.no" className="footer-link">
               Contact Us
             </a>
+            <Link to="/terms">
+              <a className="footer-link">Terms of Service | Policies</a>
+            </Link>
           </div>
         </div>
       </footer>
