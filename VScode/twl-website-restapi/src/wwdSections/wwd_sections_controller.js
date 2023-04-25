@@ -19,7 +19,7 @@ const getWwdSectionsById = (req, res) => {
 
 const updateWwdSectionsById = (req, res) => {
   const { section_header, section_text, section_number } = req.body;
-  console.log("Data received in API:", { section_header, section_text, section_number });
+  //console.log("Data received in API:", { section_header, section_text, section_number });
   const { id } = req.params; // Extract the ID from the URL parameters
   pool.query(
     queries.updateWwdSectionsById,
@@ -47,16 +47,17 @@ const createWwdSectionsById = (req, res) => {
   });
 };
 
-
 const deleteWwdSectionsById = (req, res) => {
   const id = parseInt(req.params.id);
   // check if Section exists
   pool.query(queries.getWwdSectionsById, [id], (error, results) => {
-      
-      pool.query(queries.deleteWwdSectionsById, [id], (error, results) => {
-          if(error) throw error;
-          res.status(200).send("Section removed succesfully!")
-      })
+    if (error) throw error;
+
+    pool.query(queries.deleteWwdSectionsById, [id], (error, results) => {
+      if (error) throw error;
+
+      res.status(200).json({ message: 'Section removed succesfully!' });
+    })
   })
 }
 
